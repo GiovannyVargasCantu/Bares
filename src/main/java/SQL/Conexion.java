@@ -22,7 +22,7 @@ public class Conexion {
     String usuario = "usersql";
     String contrasenia = "root2";
     String bd = "Bares";
-    String ip = "localhost";
+    String ip = "192.168.100.3";
     String puerto = "1433";
     
     String cadena = "jdbc:sqlserver://"+ip+":"+puerto+"/"+bd;
