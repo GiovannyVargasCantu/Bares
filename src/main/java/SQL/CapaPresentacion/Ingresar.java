@@ -81,10 +81,12 @@ public class Ingresar extends javax.swing.JFrame {
                         .addComponent(BotonIngresar))
                     .addComponent(ContraseniaTxtField, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
                 .addGap(99, 99, 99)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(134, 134, 134)
-                .addComponent(jLabel1))
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,6 +126,11 @@ public class Ingresar extends javax.swing.JFrame {
         String contrasenia = ContraseniaTxtField.getText(); //Aparece en amarillo getText de contrasenia porque "It's not longer supported by Java, something like that, doesn't affect our proyect"
         Conexion con = new Conexion();
         con.establecerConexion(usuario,contrasenia);
+        if(Conexion.validacion){
+            Menu menu = new Menu();
+            menu.setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_BotonIngresarMouseClicked
 
     /**

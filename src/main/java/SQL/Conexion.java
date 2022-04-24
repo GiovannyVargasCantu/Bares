@@ -19,7 +19,6 @@ package SQL;
     
 public class Conexion {
     Connection conectar = null;
-    public static boolean bandera = true;
     //String usuario = "usersql";
     //String contrasenia = "root2";
     String bd = "Bares";
@@ -27,12 +26,14 @@ public class Conexion {
     String puerto = "1433";
     
     String cadena = "jdbc:sqlserver://"+ip+":"+puerto+"/"+bd;
+    public static boolean validacion = true;
     
     public Connection establecerConexion(String usuario, String contrasenia){
         try {
             String cadenaConexion = "jdbc:sqlserver://"+ip+":"+puerto+";"+"databaseName="+bd+";encrypt=true;trustServerCertificate=true";
             conectar = DriverManager.getConnection(cadenaConexion,usuario,contrasenia);
            JOptionPane.showMessageDialog(null,"Credenciales correctas");
+           validacion = true;
        /* if(bandera){ //Si es cierto se genera el select y demas       //Prueba de select desde java
              Statement stm = conectar.createStatement();
               ResultSet rs = stm.executeQuery("Select * from Cliente");
@@ -45,6 +46,7 @@ public class Conexion {
     }*/
         } catch (HeadlessException | SQLException e) { 
             JOptionPane.showMessageDialog(null,"Error al conectar a la base de datos, error:"+ e.toString());
+            validacion = false;
             }
         return conectar;    
         }
