@@ -26,6 +26,10 @@ public class Main implements ActionListener {
     private static JLabel exito;
 
     public static void main(String[] args) {
+
+        //Conexion objetoconexion = new Conexion();  //Genera la conexión a la BD Local
+        //objetoconexion.establecerConexion();
+
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();
         frame.setSize(400,250);
@@ -56,9 +60,11 @@ public class Main implements ActionListener {
         boton.addActionListener(new Main()); //Añadimos un actionListener, que abajo tenemos su metodo
         panel.add(boton); //Añadimos al panel
 
+        /*exito = new Jlabel();
+        exito.setBounds(10,100,80,25);
+        panel.add(exito)*/
+
         frame.setVisible(true);
-
-
         
     }
 
@@ -66,17 +72,21 @@ public class Main implements ActionListener {
     public void actionPerformed(ActionEvent arg0) {
         //System.out.println("Clickeaste el boton!"); //Verificación en la consola que todo funciona correcto
         String usuario = usuarioText.getText(); //Obtiene los "valores" tanto del usuario como contraseña, esto es como un ngmodel
-        String contrasenia = contraseniaText.getText();
+        String contrasenia = contraseniaText.getText(); //Aparece en amarillo getText de contrasenia porque "It's not longer supported by Java, something like that, doesn't affect our proyect"
+        Conexion con = new Conexion();
+        con.establecerConexion(usuario,contrasenia);
+
         //System.out.println("Usuario:"+usuario+ "\nContraseña:" + contrasenia); //Verificacion utilizada para saber si la funcionalidad de credenciales fue correcta
 
-        if(usuario.equals("usersql") && contrasenia.equals("root2")){ //Basicamente si el usuario y contraseña es igual ,procede a la conexion
+        //Login utilizado previamente, lo dejo como evidencia si lo necesito para un futuro
+        /*if(usuario.equals("usersql") && contrasenia.equals("root2")){ //Basicamente si el usuario y contraseña es igual ,procede a la conexion
         Conexion.bandera = !(Conexion.bandera); //WIP Es para que solo sea la entrada y no se hagan consultas ni nada por ahora, WORK IN PROGRESS
         Conexion objetoconexion = new Conexion();  //Genera la conexión a la BD Local
         objetoconexion.establecerConexion();
         }
         else{ //De no ser las credenciales correctas, nos suelta un mensaje en una ventanita
-            JOptionPane.showMessageDialog(null,"Credenciales incorrectas, intentar de nuevo"); 
-        }
+            JOptionPane.showMessageDialog(null,"Credenciales incorrectas, intentar de nuevo"); */
+        //}//
         
     }
 }
