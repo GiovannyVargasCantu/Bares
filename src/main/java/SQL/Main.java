@@ -3,34 +3,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package SQL;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 /**
  *
  * @author Giovanny Vargas
  */
-public class Main implements ActionListener {
-    private static JLabel usuarioLabel;
+public class Main {
+    /*private static JLabel usuarioLabel;
     private static JTextField usuarioText;
     private static JLabel contraseniaLabel;
     private static JPasswordField contraseniaText;
     private static JButton boton;
-    private static JLabel exito;
+    //private static JLabel exito;*/
 
     public static void main(String[] args) {
 
         //Conexion objetoconexion = new Conexion();  //Genera la conexión a la BD Local
         //objetoconexion.establecerConexion();
 
-        JPanel panel = new JPanel();
+        /*JPanel panel = new JPanel();
         JFrame frame = new JFrame();
         frame.setSize(400,250);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,7 +29,7 @@ public class Main implements ActionListener {
 
         panel.setLayout(null);
 
-        usuarioLabel = new JLabel("Usuario"); //Asignamos un label (Puedes relacionarlo a TS, siendo label parecido)
+        /*usuarioLabel = new JLabel("Usuario"); //Asignamos un label (Puedes relacionarlo a TS, siendo label parecido)
         usuarioLabel.setBounds(10,20,80,25);  //Asignamos la posicion (Puedes relacionarlo a CSS) Siendo el orden Horizontalidad, Verticalidad, y lo siguiente es lo mismo pero para el placeHolder
         panel.add(usuarioLabel);// Se agrega al panel 
 
@@ -64,17 +55,18 @@ public class Main implements ActionListener {
         exito.setBounds(10,100,80,25);
         panel.add(exito)*/
 
-        frame.setVisible(true);
+        //frame.setVisible(true);
         
     }
 
-    @Override 
-    public void actionPerformed(ActionEvent arg0) {
+    //@Override 
+    // void actionPerformed(ActionEvent arg0) {
         //System.out.println("Clickeaste el boton!"); //Verificación en la consola que todo funciona correcto
-        String usuario = usuarioText.getText(); //Obtiene los "valores" tanto del usuario como contraseña, esto es como un ngmodel
+        //Antes de crear el JFRAME
+        /*String usuario = usuarioText.getText(); //Obtiene los "valores" tanto del usuario como contraseña, esto es como un ngmodel
         String contrasenia = contraseniaText.getText(); //Aparece en amarillo getText de contrasenia porque "It's not longer supported by Java, something like that, doesn't affect our proyect"
         Conexion con = new Conexion();
-        con.establecerConexion(usuario,contrasenia);
+        con.establecerConexion(usuario,contrasenia);*/
 
         //System.out.println("Usuario:"+usuario+ "\nContraseña:" + contrasenia); //Verificacion utilizada para saber si la funcionalidad de credenciales fue correcta
 
@@ -88,5 +80,5 @@ public class Main implements ActionListener {
             JOptionPane.showMessageDialog(null,"Credenciales incorrectas, intentar de nuevo"); */
         //}//
         
-    }
+    //}
 }
