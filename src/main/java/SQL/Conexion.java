@@ -18,7 +18,7 @@ package SQL;
     import javax.swing.JOptionPane;
     
 public class Conexion {
-    Connection conectar = null;
+    public static Connection conectar = null;
     //String usuario = "usersql";
     //String contrasenia = "root2";
     String bd = "Bares";
@@ -50,7 +50,21 @@ public class Conexion {
             }
         return conectar;    
         }
-  
+    
+       public void ConsultaClientes() throws SQLException{
+        Statement stm = conectar.createStatement();
+              ResultSet rs = stm.executeQuery("Select * from Cliente");
+              
+             while(rs.next()) {
+         System.out.println("ClienteID: " + rs.getString("ClienteID")+",");
+         System.out.print("Nombre: "+rs.getString("Nombre")+"\n");
+         System.out.print("Apellidos: "+rs.getString("Apellido")+"\n");
+         System.out.print("Tarjeta Bancaria: "+rs.getString("TarjetaBancaria")+"\n");
+         System.out.print("Numero Telefonico Cliente: "+rs.getString("NumeroCliente")+"\n\n");
+}
+             rs.close();
+             stm.close();
+       }
         /*public int Login (String User, String Password){ //Metodo que iba utilizar previamente con tablas de SQL SERVER de Usuarios replicando las de Security, pero todo se hace
             desde establecer Conexion
             int resultado = 0;
