@@ -16,6 +16,10 @@
             <artifactId>mssql-jdbc</artifactId>
             <version>11.1.0.jre17-preview</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.toedter</groupId>
+            <artifactId>jcalendar</artifactId>
+            <version>1.4</version>
+        </dependency>
     </dependencies>
 </project>

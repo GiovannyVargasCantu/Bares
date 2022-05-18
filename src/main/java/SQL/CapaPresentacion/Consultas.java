@@ -5,9 +5,9 @@
 package SQL.CapaPresentacion;
 
 import SQL.Conexion;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.sql.SQLException;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
 
 /**
  *
@@ -21,6 +21,8 @@ public class Consultas extends javax.swing.JFrame {
     public Consultas() {
         initComponents();
     }
+    
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,11 +82,7 @@ public class Consultas extends javax.swing.JFrame {
         // TODO add your handling code here:
         Conexion conexionConsulta = new Conexion();
         //Ejemplo Consulta Clientes (Solo hay dos valores
-        try {
-            conexionConsulta.ConsultaClientes();
-        } catch (SQLException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        conexionConsulta.ConsultaClientes();
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void BotonRegresoConsultasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonRegresoConsultasMouseClicked

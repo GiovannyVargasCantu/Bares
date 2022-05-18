@@ -4,6 +4,7 @@
  */
 package SQL;
 
+    import com.sun.jdi.Value;
     import java.awt.HeadlessException;
     import java.sql.Connection;
 
@@ -13,9 +14,17 @@ package SQL;
      */
     import java.sql.DriverManager;
     import java.sql.ResultSet;
+    import java.util.ArrayList;
+    import java.util.List;
     import java.sql.SQLException;
     import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
     import javax.swing.JOptionPane;
+
+//import javax.swing.JTable;
+//import javax.swing.table.DefaultTableModel;
+//import java.sql.ResultSetMetaData;
     
 public class Conexion {
     public static Connection conectar = null;
@@ -24,6 +33,9 @@ public class Conexion {
     String bd = "Bares";
     String ip = "localhost";
     String puerto = "1433";
+    Statement st = null;
+    ResultSet rs = null;
+    
     
     String cadena = "jdbc:sqlserver://"+ip+":"+puerto+"/"+bd;
     public static boolean validacion = true;
@@ -51,43 +63,37 @@ public class Conexion {
         return conectar;    
         }
     
-       public void ConsultaClientes() throws SQLException{
-        Statement stm = conectar.createStatement();
-              ResultSet rs = stm.executeQuery("Select * from Cliente");
-              
-             while(rs.next()) {
-         System.out.println("ClienteID: " + rs.getString("ClienteID")+",");
-         System.out.print("Nombre: "+rs.getString("Nombre")+"\n");
-         System.out.print("Apellidos: "+rs.getString("Apellido")+"\n");
-         System.out.print("Tarjeta Bancaria: "+rs.getString("TarjetaBancaria")+"\n");
-         System.out.print("Numero Telefonico Cliente: "+rs.getString("NumeroCliente")+"\n\n");
-}
-             rs.close();
-             stm.close();
+       public  List<Value> ConsultaClientes() {
+            List<Value> values = new ArrayList<Value>();
+             try {
+                 st = conectar.createStatement();
+                 rs = st.executeQuery("Select * from Cliente");
+
+                 
+                 while(rs.next()) {
+                     Valores v = new Valores();
+                     v.setClienteID(rs.getString("ClienteID"));
+                     v.setNombre(rs.getString("Nombre"));
+                     v.setApellidos(rs.getString("Apellido"));
+                     v.setTarjetaBancaria(rs.getString("TarjetaBancaria"));
+                     v.setNumeroTelCliente(rs.getString("NumeroCliente"));
+                     values.add((Value) v);
+                 }
+             } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            }
+             finally{
+                 try {
+                     rs.close();
+                 } catch (SQLException e) {
+                 }
+                 try {
+                     st.close();
+                 } catch (SQLException e) {
+                 }
+             }
+        return values;
        }
-        /*public int Login (String User, String Password){ //Metodo que iba utilizar previamente con tablas de SQL SERVER de Usuarios replicando las de Security, pero todo se hace
-            desde establecer Conexion
-            int resultado = 0;
-
-            try {
-                Statement ejecutor = conectar.createStatement();
-                ResultSet result = ejecutor.executeQuery("Select * from Usuarios Where UsuarioID = '"+User+"'and Contrasenia = '"+Password+"'");
-
-                if (result.next()){
-                    JOptionPane.showMessageDialog(null,"Bienvenido");
-                    resultado = 1;
-                }
-                else{
-                    JOptionPane.showMessageDialog(null,"Credenciales incorrectas");
-                    resultado = 0;
-                }
-                
-            } 
-            catch (HeadlessException | SQLException e) { 
-                System.out.println("Error al conectar a la base de datos, error:"+ e.toString());
-               }
-            
-            return resultado;
-        }*/
+      
 }
 
