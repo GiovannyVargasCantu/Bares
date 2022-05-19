@@ -25,6 +25,11 @@ public final class Ingresar extends javax.swing.JFrame {
         mostrarFecha();
         mostrarTiempo();
     }
+
+ 
+    
+    public static String usuario;
+    public static String contrasenia;
     
     void mostrarFecha(){
         Date fecha = new Date();
@@ -63,6 +68,7 @@ public final class Ingresar extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         FechaLabel = new javax.swing.JLabel();
         HoraLabel = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,7 +114,11 @@ public final class Ingresar extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(40, 40, 40)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(126, 126, 126)
@@ -138,7 +148,7 @@ public final class Ingresar extends javax.swing.JFrame {
                                 .addComponent(UsuarioLabel)
                                 .addGap(73, 73, 73)
                                 .addComponent(UsuarioTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(95, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,12 +172,14 @@ public final class Ingresar extends javax.swing.JFrame {
                         .addComponent(ContraseniaTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
-                .addComponent(BotonIngresar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BotonIngresar)
+                    .addComponent(jLabel5))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(jLabel1)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -183,11 +195,11 @@ public final class Ingresar extends javax.swing.JFrame {
 
     private void BotonIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonIngresarMouseClicked
         // TODO add your handling code here:
-        String usuario = UsuarioTxtField.getText(); //Obtiene los "valores" tanto del usuario como contraseña, esto es como un ngmodel
-        String contrasenia = ContraseniaTxtField.getText(); //Aparece en amarillo getText de contrasenia porque "It's not longer supported by Java, something like that, doesn't affect our proyect"
+        usuario = UsuarioTxtField.getText(); //Obtiene los "valores" tanto del usuario como contraseña, esto es como un ngmodel
+        contrasenia = ContraseniaTxtField.getText(); //Aparece en amarillo getText de contrasenia porque "It's not longer supported by Java, something like that, doesn't affect our proyect"
         Conexion con = new Conexion();
-        con.establecerConexion(usuario,contrasenia);
-        if(Conexion.validacion){
+        con.establecerConexion();
+        if(Conexion.validacion){ 
             Menu menu = new Menu();
             menu.setVisible(true);
             dispose();
@@ -242,5 +254,6 @@ public final class Ingresar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }
