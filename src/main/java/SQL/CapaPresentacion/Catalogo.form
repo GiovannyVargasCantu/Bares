@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="BotonRegresoConsultas" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="BotonFacturas" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="BotonTickets" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="BotonClientes" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                      <Component id="BotonEmpleados" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+                      <Component id="BotonProveedores" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                      <Component id="BotonComandas" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="BotonHorarios" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="BotonEstados" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="BotonPuestos" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                      <Component id="BotonProductos" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="BotonMunicipios" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="86" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="BotonClientes" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BotonProveedores" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BotonEmpleados" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BotonHorarios" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BotonPuestos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BotonProductos" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="BotonFacturas" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BotonTickets" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BotonComandas" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BotonEstados" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BotonMunicipios" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="235" max="32767" attributes="0"/>
+              <Component id="BotonRegresoConsultas" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JButton" name="BotonClientes">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Clientes"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BotonClientesMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="BotonRegresoConsultas">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Regresar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BotonRegresoConsultasMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="BotonProveedores">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Proveedores"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BotonProveedoresMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="BotonEmpleados">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Empleados"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BotonEmpleadosMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="BotonHorarios">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Horarios"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BotonHorariosMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="BotonPuestos">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Puestos"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BotonPuestosMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="BotonProductos">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Productos"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BotonProductosMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="BotonFacturas">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Facturas"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BotonFacturasMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="BotonTickets">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tickets"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BotonTicketsMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="BotonComandas">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Comandas"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BotonComandasMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="BotonEstados">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Estados"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BotonEstadosMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="BotonMunicipios">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Municipios"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BotonMunicipiosMouseClicked"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>

@@ -25,7 +25,7 @@ package SQL;
     
 public class Conexion {
     public static Connection conexion = null;
-    public static String cadenaconexion = "jdbc:sqlserver://localhost:1433;databaseName=Bares;encrypt=true;trustServerCertificate=true";
+    public static String cadenaconexion = "jdbc:sqlserver://localhost:1433;databaseName=Bares11;encrypt=true;trustServerCertificate=true";
     public static boolean validacion = true;
     public Connection establecerConexion(){
          //System.out.println(usuario);
@@ -51,7 +51,7 @@ public class Conexion {
 
         try
         {
-           conexion = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Bares;encrypt=true;trustServerCertificate=true","usersql","root2");
+           conexion = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Bares11;encrypt=true;trustServerCertificate=true","usersql","root2");
         } catch (SQLException e)
         {
             e.printStackTrace();
@@ -94,6 +94,150 @@ public class Conexion {
             // Se crea un Statement, para realizar la consulta
             Statement s = conexion.createStatement();
             String query = "Select * from Proveedor";
+
+            // Se realiza la consulta. Los resultados se guardan en el
+            // ResultSet rs
+            rs = s.executeQuery(query);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet CatalogoEmpleados() {
+       ResultSet rs = null;
+        try
+        {
+            // Se crea un Statement, para realizar la consulta
+            Statement s = conexion.createStatement();
+            String query = "Select * from Empleado";
+
+            // Se realiza la consulta. Los resultados se guardan en el
+            // ResultSet rs
+            rs = s.executeQuery(query);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet CatalogoHorarios() {
+         ResultSet rs = null;
+        try
+        {
+            // Se crea un Statement, para realizar la consulta
+            Statement s = conexion.createStatement();
+            String query = "Select * from Horario";
+
+            // Se realiza la consulta. Los resultados se guardan en el
+            // ResultSet rs
+            rs = s.executeQuery(query);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet CatalogoPuestos() {
+        ResultSet rs = null;
+        try
+        {
+            // Se crea un Statement, para realizar la consulta
+            Statement s = conexion.createStatement();
+            String query = "Select * from Puesto";
+
+            // Se realiza la consulta. Los resultados se guardan en el
+            // ResultSet rs
+            rs = s.executeQuery(query);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet CatalogoFacturas() {
+       ResultSet rs = null;
+        try
+        {
+            // Se crea un Statement, para realizar la consulta
+            Statement s = conexion.createStatement();
+            String query = "Select * from Factura";
+
+            // Se realiza la consulta. Los resultados se guardan en el
+            // ResultSet rs
+            rs = s.executeQuery(query);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet CatalogoTickets() {
+        ResultSet rs = null;
+        try
+        {
+            // Se crea un Statement, para realizar la consulta
+            Statement s = conexion.createStatement();
+            String query = "Select * from Ticket";
+
+            // Se realiza la consulta. Los resultados se guardan en el
+            // ResultSet rs
+            rs = s.executeQuery(query);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet CatalogoComandas() {
+      ResultSet rs = null;
+        try
+        {
+            // Se crea un Statement, para realizar la consulta
+            Statement s = conexion.createStatement();
+            String query = "Select * from Comanda";
+
+            // Se realiza la consulta. Los resultados se guardan en el
+            // ResultSet rs
+            rs = s.executeQuery(query);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet CatalogoEstados() {
+        ResultSet rs = null;
+        try
+        {
+            // Se crea un Statement, para realizar la consulta
+            Statement s = conexion.createStatement();
+            String query = "Select * from Estados";
+
+            // Se realiza la consulta. Los resultados se guardan en el
+            // ResultSet rs
+            rs = s.executeQuery(query);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet CatalogoMunicipios() {
+       ResultSet rs = null;
+        try
+        {
+            // Se crea un Statement, para realizar la consulta
+            Statement s = conexion.createStatement();
+            String query = "Select * from Municipios";
 
             // Se realiza la consulta. Los resultados se guardan en el
             // ResultSet rs
