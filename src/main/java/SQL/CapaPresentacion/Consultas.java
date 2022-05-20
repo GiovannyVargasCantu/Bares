@@ -5,6 +5,9 @@
 package SQL.CapaPresentacion;
 
 import SQL.Conexion;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 //import java.sql.SQLException;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
@@ -33,15 +36,16 @@ public class Consultas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        BotonClientes = new javax.swing.JButton();
         BotonRegresoConsultas = new javax.swing.JButton();
+        BotonProveedores = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Clientes");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        BotonClientes.setText("Clientes");
+        BotonClientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                BotonClientesMouseClicked(evt);
             }
         });
 
@@ -52,14 +56,23 @@ public class Consultas extends javax.swing.JFrame {
             }
         });
 
+        BotonProveedores.setText("Proveedores");
+        BotonProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotonProveedoresMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jButton1)
-                .addContainerGap(300, Short.MAX_VALUE))
+                .addComponent(BotonClientes)
+                .addGap(47, 47, 47)
+                .addComponent(BotonProveedores)
+                .addContainerGap(158, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BotonRegresoConsultas)
@@ -69,7 +82,9 @@ public class Consultas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(64, 64, 64)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BotonClientes)
+                    .addComponent(BotonProveedores))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
                 .addComponent(BotonRegresoConsultas)
                 .addGap(26, 26, 26))
@@ -78,12 +93,16 @@ public class Consultas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        // TODO add your handling code here:
-        TablaClientes tabla = new TablaClientes();
-        tabla.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButton1MouseClicked
+    private void BotonClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonClientesMouseClicked
+        try {
+            // TODO add your handling code here:
+            TablaClientes tabla = new TablaClientes();
+            tabla.setVisible(true);
+            dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(Consultas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BotonClientesMouseClicked
 
     private void BotonRegresoConsultasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonRegresoConsultasMouseClicked
         // TODO add your handling code here:
@@ -91,6 +110,17 @@ public class Consultas extends javax.swing.JFrame {
         menu.setVisible(true);
         dispose();
     }//GEN-LAST:event_BotonRegresoConsultasMouseClicked
+
+    private void BotonProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonProveedoresMouseClicked
+        try {
+            // TODO add your handling code here:
+            TablaProveedores tabla = new TablaProveedores();
+            tabla.setVisible(true);
+            dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(Consultas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_BotonProveedoresMouseClicked
 
     /**
      * @param args the command line arguments
@@ -128,7 +158,8 @@ public class Consultas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonClientes;
+    private javax.swing.JButton BotonProveedores;
     private javax.swing.JButton BotonRegresoConsultas;
-    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

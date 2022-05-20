@@ -86,5 +86,23 @@ public class Conexion {
             e.printStackTrace();
         }
     }
+
+    public ResultSet CatalogoProveedores() {
+      ResultSet rs = null;
+        try
+        {
+            // Se crea un Statement, para realizar la consulta
+            Statement s = conexion.createStatement();
+            String query = "Select * from Proveedor";
+
+            // Se realiza la consulta. Los resultados se guardan en el
+            // ResultSet rs
+            rs = s.executeQuery(query);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return rs;
+    }
 }
 
