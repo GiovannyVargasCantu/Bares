@@ -98,7 +98,7 @@ public class Consultas extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Parámetros de Búsqueda:");
 
-        diaTextField.setEditable(false);
+        diaTextField.setEnabled(false);
         diaTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 diaTextFieldActionPerformed(evt);
@@ -119,7 +119,7 @@ public class Consultas extends javax.swing.JFrame {
 
         jLabel2.setText("/");
 
-        mesTextField.setEditable(false);
+        mesTextField.setEnabled(false);
         mesTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mesTextFieldActionPerformed(evt);
@@ -128,7 +128,7 @@ public class Consultas extends javax.swing.JFrame {
 
         jLabel3.setText("/");
 
-        anioTextField.setEditable(false);
+        anioTextField.setEnabled(false);
         anioTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 anioTextFieldActionPerformed(evt);
@@ -142,7 +142,7 @@ public class Consultas extends javax.swing.JFrame {
             }
         });
 
-        empleadoIDTextField.setEditable(false);
+        empleadoIDTextField.setEnabled(false);
 
         jLabel4.setText("Orden:");
 
@@ -195,7 +195,7 @@ public class Consultas extends javax.swing.JFrame {
             }
         });
 
-        diaTextField2.setEditable(false);
+        diaTextField2.setEnabled(false);
         diaTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 diaTextField2ActionPerformed(evt);
@@ -204,7 +204,7 @@ public class Consultas extends javax.swing.JFrame {
 
         jLabel5.setText("/");
 
-        mesTextField2.setEditable(false);
+        mesTextField2.setEnabled(false);
         mesTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mesTextField2ActionPerformed(evt);
@@ -213,7 +213,7 @@ public class Consultas extends javax.swing.JFrame {
 
         jLabel6.setText("/");
 
-        anioTextField2.setEditable(false);
+        anioTextField2.setEnabled(false);
         anioTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 anioTextField2ActionPerformed(evt);
@@ -251,17 +251,14 @@ public class Consultas extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(buscarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(fechaCheckbox))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(38, 38, 38)
-                                        .addComponent(jLabel1))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
-                                        .addComponent(empleadoIDCheckbox)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(fechaCheckbox))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(empleadoIDCheckbox)))))
                 .addGap(36, 36, 36))
             .addGroup(layout.createSequentialGroup()
                 .addGap(925, 925, 925)

@@ -188,7 +188,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="diaTextField">
       <Properties>
-        <Property name="editable" type="boolean" value="false"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="diaTextFieldActionPerformed"/>
@@ -210,7 +210,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="mesTextField">
       <Properties>
-        <Property name="editable" type="boolean" value="false"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mesTextFieldActionPerformed"/>
@@ -223,7 +223,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="anioTextField">
       <Properties>
-        <Property name="editable" type="boolean" value="false"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="anioTextFieldActionPerformed"/>
@@ -239,7 +239,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="empleadoIDTextField">
       <Properties>
-        <Property name="editable" type="boolean" value="false"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
@@ -327,7 +327,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="diaTextField2">
       <Properties>
-        <Property name="editable" type="boolean" value="false"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="diaTextField2ActionPerformed"/>
@@ -340,7 +340,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="mesTextField2">
       <Properties>
-        <Property name="editable" type="boolean" value="false"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mesTextField2ActionPerformed"/>
@@ -353,7 +353,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="anioTextField2">
       <Properties>
-        <Property name="editable" type="boolean" value="false"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="anioTextField2ActionPerformed"/>
