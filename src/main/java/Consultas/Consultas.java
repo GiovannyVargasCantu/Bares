@@ -672,12 +672,18 @@ public class Consultas extends javax.swing.JFrame {
         // TODO add your handling code here:
         anteriorRadioButton.setEnabled(true);
         posteriorRadioButton.setEnabled(true);
+        diaTextField2.setEnabled(false);
+        mesTextField2.setEnabled(false);
+        anioTextField2.setEnabled(false);
     }//GEN-LAST:event_SingleFechaRadioButtonActionPerformed
 
     private void DuoFechaRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DuoFechaRadioButtonActionPerformed
         // TODO add your handling code here:
         anteriorRadioButton.setEnabled(false);
         posteriorRadioButton.setEnabled(false);
+        diaTextField2.setEnabled(true);
+        mesTextField2.setEnabled(true);
+        anioTextField2.setEnabled(true);
     }//GEN-LAST:event_DuoFechaRadioButtonActionPerformed
 
     /**
