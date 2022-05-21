@@ -7,6 +7,9 @@ package Alterar;
 import SQL.Conexion;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.util.Enumeration;
+import javax.swing.AbstractButton;
+import javax.swing.JRadioButton;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -43,7 +46,12 @@ public class AlterarMenu extends javax.swing.JFrame {
         TarjetaBancariaRadioModificar.setEnabled(false);
         NumeroTelefonicoContactoRadioModificar.setEnabled(false);
         //Eliminar
-        jTextField3.setEnabled(false);
+        ClienteIDEliminar.setEnabled(false);
+        TarjetaBancariaEliminar.setEnabled(false);
+        NumeroTelefonoContactoEliminar.setEnabled(false);
+        ClienteIDRadioEliminar.setEnabled(false);
+        TarjetaBancariaRadioEliminar.setEnabled(false);
+        NumeroTelefonoContactoRadioEliminar.setEnabled(false);
     }
     private void InicializarAgregar(){
         ClienteIDTexto.setEnabled(true);
@@ -67,7 +75,12 @@ public class AlterarMenu extends javax.swing.JFrame {
         
     }
     private void InicializarEliminar(){
-        jTextField3.setEnabled(true);
+       ClienteIDEliminar.setEnabled(true);
+       TarjetaBancariaEliminar.setEnabled(true);
+       NumeroTelefonoContactoEliminar.setEnabled(true);
+       ClienteIDRadioEliminar.setEnabled(true);
+       TarjetaBancariaRadioEliminar.setEnabled(true);
+       NumeroTelefonoContactoRadioEliminar.setEnabled(true);
     }
     private void OcultarAgregar(){
         ClienteIDTexto.setEnabled(false);
@@ -90,19 +103,28 @@ public class AlterarMenu extends javax.swing.JFrame {
         NumeroTelefonicoContactoRadioModificar.setEnabled(false);
     }
      private void OcultarEliminar() {
-       jTextField3.setEnabled(false);
+       ClienteIDEliminar.setEnabled(false);
+       TarjetaBancariaEliminar.setEnabled(false);
+       NumeroTelefonoContactoEliminar.setEnabled(false);
+       ClienteIDRadioEliminar.setEnabled(false);
+       TarjetaBancariaRadioEliminar.setEnabled(false);
+       NumeroTelefonoContactoRadioEliminar.setEnabled(false);
     }
 
     private Conexion bd;
     String OpcionElegida;
     int elegir;
+    int bandera;
     String IndiceClienteID;
     String ClienteID ;
     String NombreCliente; 
     String ApellidoCliente;
     String TarjetaBancaria;
     String NumeroTelefonoContacto;
+    String Query = null;
     
+    
+    //Este Metodo funciona a la perfeccion
      private void AgregarCliente() {
        ClienteID = ClienteIDTexto.getText();
        NombreCliente = NombreClienteTexto.getText();
@@ -110,14 +132,16 @@ public class AlterarMenu extends javax.swing.JFrame {
        TarjetaBancaria = TarjetaBancariaTexto.getText();
        NumeroTelefonoContacto = NumeroTelefonoContactoTexto.getText();
        
-       String Query = "INSERT INTO CLIENTE VALUES (" +ClienteID+ ",'"+NombreCliente+"','"+ApellidoCliente+"','"+TarjetaBancaria+"','"+NumeroTelefonoContacto+"');";
+       Query = "INSERT INTO CLIENTE VALUES (" +ClienteID+ ",'"+NombreCliente+"','"+ApellidoCliente+"','"+TarjetaBancaria+"','"+NumeroTelefonoContacto+"');";
        bd = new Conexion();        
        bd.AgregarClientes(Query);
+       bd.cierraConexion();
      }
-     
+     //Este Metodo es WIP debido a que debemos hacer las validaciones por cada boton, es decir el usuario es capaz de modificar en teoria todos los atributos de la tabla, pero a su vez puede modificar
+     //solo unos cuantos, por lo que hay que modificar el query para cada forma posible
      private void ModificarCliente(){
          IndiceClienteID =IndiceClienteIDModficar.getText();
-         String Query = null;
+        
          if(ClienteIDRadioModificar.isSelected()) ClienteID = ClienteIDModificar.getText();
          if(NombreClienteRadioModificar.isSelected()) NombreCliente = NombreClienteModificar.getText();
          if(ApellidosClienteRadioModificar.isSelected()) ApellidoCliente = ApellidoClienteModificar.getText();
@@ -125,12 +149,12 @@ public class AlterarMenu extends javax.swing.JFrame {
          if(NumeroTelefonicoContactoRadioModificar.isSelected()) NumeroTelefonoContacto = NumeroTelefonoContactoModificar.getText();
          
         
-             
-         /*if((ClienteIDRadioModificar.isSelected())&&(NombreClienteRadioModificar.isSelected())&&(ApellidosClienteRadioModificar.isSelected())&&(TarjetaBancariaRadioModificar.isSelected())&&(NumeroTelefonicoContactoRadioModificar.isSelected())){
+        if((ClienteIDRadioModificar.isSelected()))     
+         if((ClienteIDRadioModificar.isSelected())&&(NombreClienteRadioModificar.isSelected())&&(ApellidosClienteRadioModificar.isSelected())&&(TarjetaBancariaRadioModificar.isSelected())&&(NumeroTelefonicoContactoRadioModificar.isSelected())){
              Query = "UPDATE Cliente SET ClienteID = "+ClienteID+",Nombre='"+NombreCliente+"',Apellido='"+ApellidoCliente+"',TarjetaBancaria = '"+TarjetaBancariaModificar+"',NumeroClienteContacto='"+NumeroTelefonoContactoModificar+"' WHERE ClienteID ="+IndiceClienteID+";";
          }     
          
-         //else if((ClienteIDRadioModificar.isSelected())&&(NombreClienteRadioModificar.isSelected())&&(ApellidosClienteRadioModificar.isSelected())&&(TarjetaBancariaRadioModificar.isSelected())){
+         else if((ClienteIDRadioModificar.isSelected())&&(NombreClienteRadioModificar.isSelected())&&(ApellidosClienteRadioModificar.isSelected())&&(TarjetaBancariaRadioModificar.isSelected())){
              Query = "UPDATE Cliente SET ClienteID = "+ClienteID+",Nombre='"+NombreCliente+"',Apellido='"+ApellidoCliente+"',TarjetaBancaria = '"+TarjetaBancariaModificar+"' WHERE ClienteID ="+IndiceClienteID+";";
          }
              
@@ -144,7 +168,7 @@ public class AlterarMenu extends javax.swing.JFrame {
              Query = "UPDATE Cliente SET ClienteID = "+ClienteID+",Nombre='"+NombreCliente+"' WHERE ClienteID ="+IndiceClienteID+";";
              
          }
-         else*/if((ClienteIDRadioModificar.isSelected())){
+         else if((ClienteIDRadioModificar.isSelected())){
              Query = "UPDATE Cliente SET ClienteID = "+ClienteID+" WHERE ClienteID ="+IndiceClienteID+";";
           
          }
@@ -153,8 +177,32 @@ public class AlterarMenu extends javax.swing.JFrame {
          
          bd = new Conexion();
          bd.ModificarClientes(Query);
+         bd.cierraConexion();
 
      }
+     //Este Metodo funciona a la perfeccion
+       private void EliminarCliente() {
+           
+       if(ClienteIDRadioEliminar.isSelected()) ClienteID = ClienteIDEliminar.getText();    
+       if(TarjetaBancariaRadioEliminar.isSelected()) TarjetaBancaria = TarjetaBancariaEliminar.getText();
+       if(NumeroTelefonoContactoRadioEliminar.isSelected()) NumeroTelefonoContacto = NumeroTelefonoContactoEliminar.getText();  
+       
+           
+       
+
+            if (ClienteIDRadioEliminar.isSelected()) {
+                Query = "DELETE FROM Cliente WHERE ClienteID="+ClienteID+";";
+            }
+            if(TarjetaBancariaRadioEliminar.isSelected()){
+                Query = "DELETE FROM Cliente WHERE TarjetaBancaria='"+TarjetaBancaria+"';";
+            }
+            if(NumeroTelefonoContactoRadioEliminar.isSelected()){
+                Query = "DELETE FROM Cliente WHERE NumeroClienteContacto='"+NumeroTelefonoContacto+"';";
+            }
+            bd = new Conexion();
+            bd.EliminarClientes(Query);
+            bd.cierraConexion();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -165,6 +213,7 @@ public class AlterarMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         OpcionesDatos = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
@@ -197,8 +246,14 @@ public class AlterarMenu extends javax.swing.JFrame {
         NumeroTelefonoContactoModificar = new javax.swing.JTextField();
         IndiceClienteIDModficar = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
-        jTextField3 = new javax.swing.JTextField();
+        ClienteIDEliminar = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        ClienteIDRadioEliminar = new javax.swing.JRadioButton();
+        TarjetaBancariaEliminar = new javax.swing.JTextField();
+        NumeroTelefonoContactoEliminar = new javax.swing.JTextField();
+        TarjetaBancariaRadioEliminar = new javax.swing.JRadioButton();
+        NumeroTelefonoContactoRadioEliminar = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -400,27 +455,89 @@ public class AlterarMenu extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createMatteBorder(10, 10, 10, 10, new java.awt.Color(0, 0, 0)));
 
+        ClienteIDEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClienteIDEliminarActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Eliminar");
+
+        jLabel12.setText("Escoja en base a que eliminara");
+
+        buttonGroup1.add(ClienteIDRadioEliminar);
+        ClienteIDRadioEliminar.setText("Cliente ID");
+        ClienteIDRadioEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ClienteIDRadioEliminarMouseClicked(evt);
+            }
+        });
+        ClienteIDRadioEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClienteIDRadioEliminarActionPerformed(evt);
+            }
+        });
+
+        NumeroTelefonoContactoEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NumeroTelefonoContactoEliminarActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(TarjetaBancariaRadioEliminar);
+        TarjetaBancariaRadioEliminar.setText("Tarjeta Bancaria");
+
+        buttonGroup1.add(NumeroTelefonoContactoRadioEliminar);
+        NumeroTelefonoContactoRadioEliminar.setText("Telefono Contacto");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TarjetaBancariaEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                            .addComponent(ClienteIDEliminar, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(NumeroTelefonoContactoEliminar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(NumeroTelefonoContactoRadioEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TarjetaBancariaRadioEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ClienteIDRadioEliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                .addGap(96, 96, 96)
+                                .addComponent(jLabel3))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addComponent(jLabel12)))
+                        .addGap(0, 47, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel12)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ClienteIDRadioEliminar)
+                    .addComponent(ClienteIDEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TarjetaBancariaEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TarjetaBancariaRadioEliminar))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(NumeroTelefonoContactoEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NumeroTelefonoContactoRadioEliminar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -459,7 +576,7 @@ public class AlterarMenu extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(8, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
@@ -490,7 +607,7 @@ public class AlterarMenu extends javax.swing.JFrame {
                     break;
             case 2: ModificarCliente();
                     break;
-            case 3: System.out.println("JG DIFF");
+            case 3: EliminarCliente();
                     break;
         }
         
@@ -536,6 +653,23 @@ public class AlterarMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TarjetaBancariaRadioModificarActionPerformed
 
+    private void ClienteIDEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClienteIDEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ClienteIDEliminarActionPerformed
+
+    private void NumeroTelefonoContactoEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NumeroTelefonoContactoEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NumeroTelefonoContactoEliminarActionPerformed
+
+    private void ClienteIDRadioEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClienteIDRadioEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ClienteIDRadioEliminarActionPerformed
+
+    private void ClienteIDRadioEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ClienteIDRadioEliminarMouseClicked
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_ClienteIDRadioEliminarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -575,7 +709,9 @@ public class AlterarMenu extends javax.swing.JFrame {
     private javax.swing.JTextField ApellidoClienteModificar;
     private javax.swing.JRadioButton ApellidosClienteRadioModificar;
     private javax.swing.JTextField ApellidosClienteTexto;
+    private javax.swing.JTextField ClienteIDEliminar;
     private javax.swing.JTextField ClienteIDModificar;
+    private javax.swing.JRadioButton ClienteIDRadioEliminar;
     private javax.swing.JRadioButton ClienteIDRadioModificar;
     private javax.swing.JTextField ClienteIDTexto;
     private javax.swing.JTextField IndiceClienteIDModficar;
@@ -583,17 +719,23 @@ public class AlterarMenu extends javax.swing.JFrame {
     private javax.swing.JRadioButton NombreClienteRadioModificar;
     private javax.swing.JTextField NombreClienteTexto;
     private javax.swing.JRadioButton NumeroTelefonicoContactoRadioModificar;
+    private javax.swing.JTextField NumeroTelefonoContactoEliminar;
     private javax.swing.JTextField NumeroTelefonoContactoModificar;
+    private javax.swing.JRadioButton NumeroTelefonoContactoRadioEliminar;
     private javax.swing.JTextField NumeroTelefonoContactoTexto;
     private javax.swing.JComboBox<String> OpcionesDatos;
+    private javax.swing.JTextField TarjetaBancariaEliminar;
     private javax.swing.JTextField TarjetaBancariaModificar;
+    private javax.swing.JRadioButton TarjetaBancariaRadioEliminar;
     private javax.swing.JRadioButton TarjetaBancariaRadioModificar;
     private javax.swing.JTextField TarjetaBancariaTexto;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -605,8 +747,9 @@ public class AlterarMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
+
+  
 
    
 

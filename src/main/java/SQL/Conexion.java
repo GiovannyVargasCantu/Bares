@@ -302,5 +302,23 @@ public class Conexion {
             e.printStackTrace();
         }
     }
+
+    public void EliminarClientes(String Query) {
+        ResultSet rs = null;
+        try
+        {
+            // Se crea un Statement, para realizar la consulta
+            Statement s = conexion.createStatement();
+            String query = Query;
+
+            // Se realiza la consulta. Los resultados se guardan en el
+            // ResultSet rs
+            s.executeQuery(query);
+            System.out.println("Record deleted successfully");
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 }
 
