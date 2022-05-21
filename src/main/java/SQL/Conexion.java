@@ -286,13 +286,24 @@ public class Conexion {
      
     }
 
-    public void ModificarClientes(String Query) {
-         ResultSet rs = null;
+    public void ModificarDatos(String Query, int Tabla) {
+        String TablaModificar = null;
+        switch(Tabla) {
+            case 1:
+                TablaModificar = "Cliente";
+            break;
+            case 2:
+                TablaModificar = "Empleados";
+            break;
+            //Add more cases for the other tables!
+        }
+        
+        ResultSet rs = null;
         try
         {
             // Se crea un Statement, para realizar la consulta
             Statement s = conexion.createStatement();
-            String query = Query;
+            String query = "UPDATE " + TablaModificar + Query;
 
             // Se realiza la consulta. Los resultados se guardan en el
             // ResultSet rs
@@ -319,6 +330,27 @@ public class Conexion {
         {
             e.printStackTrace();
         }
+    }
+    
+    public ResultSet ObtenerDatos(int Tabla, String Buscado) {
+        String tablaModificar = null;
+        switch(Tabla) {
+            case 1:
+                tablaModificar = "Cliente";
+            break;
+        }
+        
+        ResultSet rs = null;
+        try {
+            Statement s = conexion.createStatement();
+            String query = "SLECT * FROM " + tablaModificar + " WHERE ClienteID = " + Buscado;
+            
+            rs = s.executeQuery(query);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
     }
 }
 

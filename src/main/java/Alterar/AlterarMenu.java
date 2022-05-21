@@ -7,7 +7,10 @@ package Alterar;
 import SQL.Conexion;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.util.Enumeration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractButton;
 import javax.swing.JRadioButton;
 import javax.swing.table.DefaultTableModel;
@@ -35,16 +38,17 @@ public class AlterarMenu extends javax.swing.JFrame {
         NumeroTelefonoContactoTexto.setEnabled(false);
         //Modificar
         IndiceClienteIDModficar.setEnabled(false);
-        ClienteIDModificar.setEnabled(false);
+        //DELETE, MAYBE
+        //ClienteIDModificar.setEnabled(false);
         NombreClienteModificar.setEnabled(false);
         ApellidoClienteModificar.setEnabled(false);
         TarjetaBancariaModificar.setEnabled(false);
         NumeroTelefonoContactoModificar.setEnabled(false);
-        ClienteIDRadioModificar.setEnabled(false);
+        /*ClienteIDRadioModificar.setEnabled(false);
         NombreClienteRadioModificar.setEnabled(false);
         ApellidosClienteRadioModificar.setEnabled(false);
         TarjetaBancariaRadioModificar.setEnabled(false);
-        NumeroTelefonicoContactoRadioModificar.setEnabled(false);
+        NumeroTelefonicoContactoRadioModificar.setEnabled(false);*/
         //Eliminar
         ClienteIDEliminar.setEnabled(false);
         TarjetaBancariaEliminar.setEnabled(false);
@@ -62,16 +66,17 @@ public class AlterarMenu extends javax.swing.JFrame {
     }
     private void InicializarModificar(){
         IndiceClienteIDModficar.setEnabled(true);
-        ClienteIDModificar.setEnabled(true);
+        //ClienteIDModificar.setEnabled(true);
         NombreClienteModificar.setEnabled(true);
         ApellidoClienteModificar.setEnabled(true);
         TarjetaBancariaModificar.setEnabled(true);
         NumeroTelefonoContactoModificar.setEnabled(true);
-        ClienteIDRadioModificar.setEnabled(true);
+        /*ClienteIDRadioModificar.setEnabled(true);
         NombreClienteRadioModificar.setEnabled(true);
         ApellidosClienteRadioModificar.setEnabled(true);
         TarjetaBancariaRadioModificar.setEnabled(true);
-        NumeroTelefonicoContactoRadioModificar.setEnabled(true);
+        NumeroTelefonicoContactoRadioModificar.setEnabled(true);*/
+        buscarButton.setEnabled(true);
         
     }
     private void InicializarEliminar(){
@@ -91,16 +96,17 @@ public class AlterarMenu extends javax.swing.JFrame {
     }
     private void OcultarModificar() {
         IndiceClienteIDModficar.setEnabled(false);
-        ClienteIDModificar.setEnabled(false);
+        /*ClienteIDModificar.setEnabled(false);*/
         NombreClienteModificar.setEnabled(false);
         ApellidoClienteModificar.setEnabled(false);
         TarjetaBancariaModificar.setEnabled(false);
         NumeroTelefonoContactoModificar.setEnabled(false);
-        ClienteIDRadioModificar.setEnabled(false);
+        /*ClienteIDRadioModificar.setEnabled(false);
         NombreClienteRadioModificar.setEnabled(false);
         ApellidosClienteRadioModificar.setEnabled(false);
         TarjetaBancariaRadioModificar.setEnabled(false);
-        NumeroTelefonicoContactoRadioModificar.setEnabled(false);
+        NumeroTelefonicoContactoRadioModificar.setEnabled(false);*/
+        buscarButton.setEnabled(false);
     }
      private void OcultarEliminar() {
        ClienteIDEliminar.setEnabled(false);
@@ -140,6 +146,7 @@ public class AlterarMenu extends javax.swing.JFrame {
      //Este Metodo es WIP debido a que debemos hacer las validaciones por cada boton, es decir el usuario es capaz de modificar en teoria todos los atributos de la tabla, pero a su vez puede modificar
      //solo unos cuantos, por lo que hay que modificar el query para cada forma posible
      private void ModificarCliente(){
+         /*
          IndiceClienteID =IndiceClienteIDModficar.getText();
         
          if(ClienteIDRadioModificar.isSelected()) ClienteID = ClienteIDModificar.getText();
@@ -172,11 +179,19 @@ public class AlterarMenu extends javax.swing.JFrame {
              Query = "UPDATE Cliente SET ClienteID = "+ClienteID+" WHERE ClienteID ="+IndiceClienteID+";";
           
          }
+         */
+         String clienteID = IDModificacion.getText();
+         String nombre = NombreClienteModificar.getText();
+         String apellidos = ApellidoClienteModificar.getText();
+         String tarjeta = TarjetaBancariaModificar.getText();
+         String numContact = NumeroTelefonoContactoModificar.getText();
          
-         
+         Query = "SET Nombre= '" + nombre + "', Apellido= '" + apellidos 
+                 + "', TarjetaBancaria = '" + tarjeta + "', NumeroClienteContacto = '" + numContact
+                 + "' WHERE ClienteID = " + clienteID + ";";
          
          bd = new Conexion();
-         bd.ModificarClientes(Query);
+         bd.ModificarDatos(Query, 2);
          bd.cierraConexion();
 
      }
@@ -234,17 +249,18 @@ public class AlterarMenu extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        ClienteIDRadioModificar = new javax.swing.JRadioButton();
-        NombreClienteRadioModificar = new javax.swing.JRadioButton();
-        ApellidosClienteRadioModificar = new javax.swing.JRadioButton();
-        TarjetaBancariaRadioModificar = new javax.swing.JRadioButton();
-        NumeroTelefonicoContactoRadioModificar = new javax.swing.JRadioButton();
-        ClienteIDModificar = new javax.swing.JTextField();
         NombreClienteModificar = new javax.swing.JTextField();
         ApellidoClienteModificar = new javax.swing.JTextField();
         TarjetaBancariaModificar = new javax.swing.JTextField();
         NumeroTelefonoContactoModificar = new javax.swing.JTextField();
         IndiceClienteIDModficar = new javax.swing.JTextField();
+        buscarButton = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        IDModificacion = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         ClienteIDEliminar = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -361,7 +377,7 @@ public class AlterarMenu extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NumeroTelefonoContactoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(10, 10, 10, 10, new java.awt.Color(0, 0, 0)));
@@ -370,56 +386,69 @@ public class AlterarMenu extends javax.swing.JFrame {
 
         jLabel11.setText("ClienteID a Modificar");
 
-        ClienteIDRadioModificar.setText("Cliente ID");
-
-        NombreClienteRadioModificar.setText("Nombre");
-
-        ApellidosClienteRadioModificar.setText("Apellidos");
-
-        TarjetaBancariaRadioModificar.setText("Tarjeta Bancaria");
-        TarjetaBancariaRadioModificar.addActionListener(new java.awt.event.ActionListener() {
+        buscarButton.setText("Buscar");
+        buscarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buscarButtonMouseClicked(evt);
+            }
+        });
+        buscarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TarjetaBancariaRadioModificarActionPerformed(evt);
+                buscarButtonActionPerformed(evt);
             }
         });
 
-        NumeroTelefonicoContactoRadioModificar.setText("Telefono Contacto");
+        jLabel13.setText("Nombre");
+
+        jLabel14.setText("Apellidos");
+
+        jLabel15.setText("Tarjeta Bancaria");
+
+        jLabel16.setText("Telefono Contacto");
+
+        jLabel17.setText("ClienteID:");
+
+        IDModificacion.setEditable(false);
+        IDModificacion.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        IDModificacion.setText("0");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(18, 18, 18)
-                        .addComponent(IndiceClienteIDModficar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ClienteIDModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-                            .addComponent(NombreClienteModificar)
-                            .addComponent(ApellidoClienteModificar)
-                            .addComponent(TarjetaBancariaModificar)
-                            .addComponent(NumeroTelefonoContactoModificar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(NumeroTelefonicoContactoRadioModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(TarjetaBancariaRadioModificar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ApellidosClienteRadioModificar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(NombreClienteRadioModificar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ClienteIDRadioModificar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(21, 21, 21))))))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(106, 106, 106)
                 .addComponent(jLabel4)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(NumeroTelefonoContactoModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel17)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(IDModificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buscarButton)
+                            .addComponent(IndiceClienteIDModficar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(TarjetaBancariaModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                            .addComponent(ApellidoClienteModificar, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(NombreClienteModificar, javax.swing.GroupLayout.Alignment.LEADING))))
+                .addGap(34, 34, 34))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -430,26 +459,27 @@ public class AlterarMenu extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(IndiceClienteIDModficar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buscarButton)
+                    .addComponent(jLabel17)
+                    .addComponent(IDModificacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ClienteIDModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ClienteIDRadioModificar))
-                .addGap(10, 10, 10)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NombreClienteRadioModificar)
-                    .addComponent(NombreClienteModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(NombreClienteModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ApellidosClienteRadioModificar)
-                    .addComponent(ApellidoClienteModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ApellidoClienteModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
                 .addGap(14, 14, 14)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TarjetaBancariaModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TarjetaBancariaRadioModificar))
+                    .addComponent(jLabel15))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NumeroTelefonoContactoModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NumeroTelefonicoContactoRadioModificar))
+                    .addComponent(jLabel16))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
@@ -576,7 +606,7 @@ public class AlterarMenu extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
+                .addContainerGap(9, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
@@ -649,10 +679,6 @@ public class AlterarMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ApellidosClienteTextoActionPerformed
 
-    private void TarjetaBancariaRadioModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TarjetaBancariaRadioModificarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TarjetaBancariaRadioModificarActionPerformed
-
     private void ClienteIDEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClienteIDEliminarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ClienteIDEliminarActionPerformed
@@ -669,6 +695,32 @@ public class AlterarMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
        
     }//GEN-LAST:event_ClienteIDRadioEliminarMouseClicked
+
+    private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscarButtonActionPerformed
+
+    private void buscarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarButtonMouseClicked
+        try {
+            // TODO add your handling code here:
+            bd = new Conexion();
+            ResultSet rs = bd.ObtenerDatos(1, "1");
+            bd.cierraConexion();
+            
+            while(rs.next()) {
+                
+                IDModificacion.setText(rs.getString("ClienteID"));
+                NombreClienteModificar.setText(rs.getString("Nombre"));
+                ApellidoClienteModificar.setText(rs.getString("Apellido"));
+                TarjetaBancariaModificar.setText(rs.getString("TarjetaBancaria"));
+                NumeroTelefonoContactoModificar.setText(rs.getString("NumeroClienteContacto"));
+                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AlterarMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_buscarButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -707,18 +759,14 @@ public class AlterarMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ApellidoClienteModificar;
-    private javax.swing.JRadioButton ApellidosClienteRadioModificar;
     private javax.swing.JTextField ApellidosClienteTexto;
     private javax.swing.JTextField ClienteIDEliminar;
-    private javax.swing.JTextField ClienteIDModificar;
     private javax.swing.JRadioButton ClienteIDRadioEliminar;
-    private javax.swing.JRadioButton ClienteIDRadioModificar;
     private javax.swing.JTextField ClienteIDTexto;
+    private javax.swing.JTextField IDModificacion;
     private javax.swing.JTextField IndiceClienteIDModficar;
     private javax.swing.JTextField NombreClienteModificar;
-    private javax.swing.JRadioButton NombreClienteRadioModificar;
     private javax.swing.JTextField NombreClienteTexto;
-    private javax.swing.JRadioButton NumeroTelefonicoContactoRadioModificar;
     private javax.swing.JTextField NumeroTelefonoContactoEliminar;
     private javax.swing.JTextField NumeroTelefonoContactoModificar;
     private javax.swing.JRadioButton NumeroTelefonoContactoRadioEliminar;
@@ -727,8 +775,8 @@ public class AlterarMenu extends javax.swing.JFrame {
     private javax.swing.JTextField TarjetaBancariaEliminar;
     private javax.swing.JTextField TarjetaBancariaModificar;
     private javax.swing.JRadioButton TarjetaBancariaRadioEliminar;
-    private javax.swing.JRadioButton TarjetaBancariaRadioModificar;
     private javax.swing.JTextField TarjetaBancariaTexto;
+    private javax.swing.JButton buscarButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -736,6 +784,11 @@ public class AlterarMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
