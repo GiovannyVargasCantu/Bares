@@ -248,5 +248,24 @@ public class Conexion {
         }
         return rs;
     }
+    
+    public ResultSet ConsultarBusqueda(String Query) {
+        
+        ResultSet rs = null;
+        try
+        {
+            // Se crea un Statement, para realizar la consulta
+            Statement s = conexion.createStatement();
+            String query = Query;
+
+            // Se realiza la consulta. Los resultados se guardan en el
+            // ResultSet rs
+            rs = s.executeQuery(query);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return rs;
+    }
 }
 
