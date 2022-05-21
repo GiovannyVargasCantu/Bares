@@ -32,7 +32,7 @@ public class Consultas extends javax.swing.JFrame {
         String[] tableColumnsName = {"Ticket ID","Descripcion","Pago Total","Fecha","Metodo Pago","Comanda ID","Cajero ID"};
         DefaultTableModel aModel = (DefaultTableModel) jTable1.getModel();
         aModel.setColumnIdentifiers(tableColumnsName);
-        ResultSet rs = bd.CatalogoTickets();
+        ResultSet rs = bd.Catalogo(7);
         
         //We loop through ResultSet, as usual.
         ResultSetMetaData rsmd = rs.getMetaData();

@@ -57,24 +57,6 @@ public class Conexion {
             e.printStackTrace();
         }
     }
-     public ResultSet dameListaClientes()
-    {
-        ResultSet rs = null;
-        try
-        {
-            // Se crea un Statement, para realizar la consulta
-            Statement s = conexion.createStatement();
-            String query = "Select * from Cliente";
-
-            // Se realiza la consulta. Los resultados se guardan en el
-            // ResultSet rs
-            rs = s.executeQuery(query);
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return rs;
-    }
      
     public void cierraConexion()
     {
@@ -86,164 +68,54 @@ public class Conexion {
             e.printStackTrace();
         }
     }
-
-    public ResultSet CatalogoProveedores() {
-      ResultSet rs = null;
-        try
-        {
-            // Se crea un Statement, para realizar la consulta
-            Statement s = conexion.createStatement();
-            String query = "Select * from Proveedor";
-
-            // Se realiza la consulta. Los resultados se guardan en el
-            // ResultSet rs
-            rs = s.executeQuery(query);
-        } catch (Exception e)
-        {
-            e.printStackTrace();
+    
+    public ResultSet Catalogo(int TablaCatalogo) {
+        String Tabla = null;
+        switch(TablaCatalogo) {
+            case 1:
+                Tabla = "Cliente";
+            break;
+            case 2:
+                Tabla = "Proveedor";
+            break;
+            case 3:
+                Tabla = "Empleado";
+            break;
+            case 4:
+                Tabla = "Horario";
+            break;
+            case 5:
+                Tabla = "Puesto";
+            break;
+            case 6:
+                Tabla = "Factura";
+            break;
+            case 7:
+                Tabla = "Ticket";
+            break;
+            case 8:
+                Tabla = "Comanda";
+            break;
+            case 9:
+                Tabla = "Estados";
+            break;
+            case 10:
+                Tabla = "Municipios";
+            break;
+            case 11:
+                Tabla = "Producto";
+            break;
+            //Add some more!
         }
-        return rs;
-    }
-
-    public ResultSet CatalogoEmpleados() {
-       ResultSet rs = null;
-        try
-        {
-            // Se crea un Statement, para realizar la consulta
-            Statement s = conexion.createStatement();
-            String query = "Select * from Empleado";
-
-            // Se realiza la consulta. Los resultados se guardan en el
-            // ResultSet rs
-            rs = s.executeQuery(query);
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return rs;
-    }
-
-    public ResultSet CatalogoHorarios() {
-         ResultSet rs = null;
-        try
-        {
-            // Se crea un Statement, para realizar la consulta
-            Statement s = conexion.createStatement();
-            String query = "Select * from Horario";
-
-            // Se realiza la consulta. Los resultados se guardan en el
-            // ResultSet rs
-            rs = s.executeQuery(query);
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return rs;
-    }
-
-    public ResultSet CatalogoPuestos() {
+        
         ResultSet rs = null;
-        try
-        {
-            // Se crea un Statement, para realizar la consulta
+        try {
+            //Se crea un Statement, para realizar la consulta
             Statement s = conexion.createStatement();
-            String query = "Select * from Puesto";
-
-            // Se realiza la consulta. Los resultados se guardan en el
-            // ResultSet rs
+            String query = "SELECT * FROM " + Tabla;
+            
             rs = s.executeQuery(query);
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return rs;
-    }
-
-    public ResultSet CatalogoFacturas() {
-       ResultSet rs = null;
-        try
-        {
-            // Se crea un Statement, para realizar la consulta
-            Statement s = conexion.createStatement();
-            String query = "Select * from Factura";
-
-            // Se realiza la consulta. Los resultados se guardan en el
-            // ResultSet rs
-            rs = s.executeQuery(query);
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return rs;
-    }
-
-    public ResultSet CatalogoTickets() {
-        ResultSet rs = null;
-        try
-        {
-            // Se crea un Statement, para realizar la consulta
-            Statement s = conexion.createStatement();
-            String query = "Select * from Ticket";
-
-            // Se realiza la consulta. Los resultados se guardan en el
-            // ResultSet rs
-            rs = s.executeQuery(query);
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return rs;
-    }
-
-    public ResultSet CatalogoComandas() {
-      ResultSet rs = null;
-        try
-        {
-            // Se crea un Statement, para realizar la consulta
-            Statement s = conexion.createStatement();
-            String query = "Select * from Comanda";
-
-            // Se realiza la consulta. Los resultados se guardan en el
-            // ResultSet rs
-            rs = s.executeQuery(query);
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return rs;
-    }
-
-    public ResultSet CatalogoEstados() {
-        ResultSet rs = null;
-        try
-        {
-            // Se crea un Statement, para realizar la consulta
-            Statement s = conexion.createStatement();
-            String query = "Select * from Estados";
-
-            // Se realiza la consulta. Los resultados se guardan en el
-            // ResultSet rs
-            rs = s.executeQuery(query);
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return rs;
-    }
-
-    public ResultSet CatalogoMunicipios() {
-       ResultSet rs = null;
-        try
-        {
-            // Se crea un Statement, para realizar la consulta
-            Statement s = conexion.createStatement();
-            String query = "Select * from Municipios";
-
-            // Se realiza la consulta. Los resultados se guardan en el
-            // ResultSet rs
-            rs = s.executeQuery(query);
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return rs;
@@ -268,13 +140,51 @@ public class Conexion {
         return rs;
     }
 
-    public void AgregarClientes(String Query) {
-       ResultSet rs = null;
+    public void AgregarDatos(String Query, int Tabla) {
+        String TablaModificar = null;
+        switch(Tabla) {
+            case 1:
+                TablaModificar = "Cliente";
+            break;
+            case 2:
+                TablaModificar = "Proveedor";
+            break;
+            case 3:
+                TablaModificar = "Empleado";
+            break;
+            case 4:
+                TablaModificar = "Horario";
+            break;
+            case 5:
+                TablaModificar = "Puesto";
+            break;
+            case 6:
+                TablaModificar = "Factura";
+            break;
+            case 7:
+                TablaModificar = "Ticket";
+            break;
+            case 8:
+                TablaModificar = "Comanda";
+            break;
+            case 9:
+                TablaModificar = "Estados";
+            break;
+            case 10:
+                TablaModificar = "Municipios";
+            break;
+            case 11:
+                TablaModificar = "Producto";
+            break;
+        }
+        
+        ResultSet rs = null;
         try
         {
             // Se crea un Statement, para realizar la consulta
             Statement s = conexion.createStatement();
-            String query = Query;
+            String query = "INSERT INTO " + TablaModificar
+                + " VALUES " + Query;
 
             // Se realiza la consulta. Los resultados se guardan en el
             // ResultSet rs
@@ -293,7 +203,34 @@ public class Conexion {
                 TablaModificar = "Cliente";
             break;
             case 2:
-                TablaModificar = "Empleados";
+                TablaModificar = "Proveedor";
+            break;
+            case 3:
+                TablaModificar = "Empleado";
+            break;
+            case 4:
+                TablaModificar = "Horario";
+            break;
+            case 5:
+                TablaModificar = "Puesto";
+            break;
+            case 6:
+                TablaModificar = "Factura";
+            break;
+            case 7:
+                TablaModificar = "Ticket";
+            break;
+            case 8:
+                TablaModificar = "Comanda";
+            break;
+            case 9:
+                TablaModificar = "Estados";
+            break;
+            case 10:
+                TablaModificar = "Municipios";
+            break;
+            case 11:
+                TablaModificar = "Producto";
             break;
             //Add more cases for the other tables!
         }
@@ -324,7 +261,7 @@ public class Conexion {
 
             // Se realiza la consulta. Los resultados se guardan en el
             // ResultSet rs
-            s.executeQuery(query);
+            s.executeUpdate(query);
             System.out.println("Record deleted successfully");
         } catch (Exception e)
         {
@@ -333,17 +270,49 @@ public class Conexion {
     }
     
     public ResultSet ObtenerDatos(int Tabla, String Buscado) {
-        String tablaModificar = null;
+        String TablaModificar = null;
+        String IDBuscado = null;
         switch(Tabla) {
             case 1:
-                tablaModificar = "Cliente";
+                TablaModificar = "Cliente";
+                IDBuscado = "ClienteID";
+            break;
+            case 2:
+                TablaModificar = "Proveedor";
+            break;
+            case 3:
+                TablaModificar = "Empleado";
+            break;
+            case 4:
+                TablaModificar = "Horario";
+            break;
+            case 5:
+                TablaModificar = "Puesto";
+            break;
+            case 6:
+                TablaModificar = "Factura";
+            break;
+            case 7:
+                TablaModificar = "Ticket";
+            break;
+            case 8:
+                TablaModificar = "Comanda";
+            break;
+            case 9:
+                TablaModificar = "Estados";
+            break;
+            case 10:
+                TablaModificar = "Municipios";
+            break;
+            case 11:
+                TablaModificar = "Producto";
             break;
         }
         
         ResultSet rs = null;
         try {
             Statement s = conexion.createStatement();
-            String query = "SLECT * FROM " + tablaModificar + " WHERE ClienteID = " + Buscado;
+            String query = "SLECT * FROM " + TablaModificar + " WHERE " + IDBuscado + " = " + Buscado;
             
             rs = s.executeQuery(query);
             

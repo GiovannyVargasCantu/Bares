@@ -32,7 +32,7 @@ public class TablaProductos extends javax.swing.JFrame {
 String[] tableColumnsName = {"Producto ID","Nombre Producto","Disponible","Cantidad","Precio Unidad","Tipo Producto ID"}; 
 DefaultTableModel aModel = (DefaultTableModel) jTable1.getModel();
 aModel.setColumnIdentifiers(tableColumnsName);
-ResultSet rs =  bd.CatalogoPuestos();
+ResultSet rs =  bd.Catalogo(11);
 
 // Loop through the ResultSet and transfer in the Model
 ResultSetMetaData rsmd = rs.getMetaData();

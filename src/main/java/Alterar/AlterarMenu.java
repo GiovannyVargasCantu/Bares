@@ -138,9 +138,9 @@ public class AlterarMenu extends javax.swing.JFrame {
        TarjetaBancaria = TarjetaBancariaTexto.getText();
        NumeroTelefonoContacto = NumeroTelefonoContactoTexto.getText();
        
-       Query = "INSERT INTO CLIENTE VALUES (" +ClienteID+ ",'"+NombreCliente+"','"+ApellidoCliente+"','"+TarjetaBancaria+"','"+NumeroTelefonoContacto+"');";
+       Query = "(" +ClienteID+ ",'"+NombreCliente+"','"+ApellidoCliente+"','"+TarjetaBancaria+"','"+NumeroTelefonoContacto+"');";
        bd = new Conexion();        
-       bd.AgregarClientes(Query);
+       bd.AgregarDatos(Query, 1);
        bd.cierraConexion();
      }
      //Este Metodo es WIP debido a que debemos hacer las validaciones por cada boton, es decir el usuario es capaz de modificar en teoria todos los atributos de la tabla, pero a su vez puede modificar
@@ -191,7 +191,7 @@ public class AlterarMenu extends javax.swing.JFrame {
                  + "' WHERE ClienteID = " + clienteID + ";";
          
          bd = new Conexion();
-         bd.ModificarDatos(Query, 2);
+         bd.ModificarDatos(Query, 1);
          bd.cierraConexion();
 
      }

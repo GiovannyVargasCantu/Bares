@@ -32,7 +32,7 @@ public class TablaEmpleados extends javax.swing.JFrame {
 String[] tableColumnsName = {"Empleado ID","Nombre","Apellidos","Correo","Lugar Nacimiento","Horario","Municipio","Estado","Gerente","Puesto"}; 
 DefaultTableModel aModel = (DefaultTableModel) jTable1.getModel();
 aModel.setColumnIdentifiers(tableColumnsName);
-ResultSet rs =  bd.CatalogoEmpleados();
+ResultSet rs =  bd.Catalogo(3);
 
 // Loop through the ResultSet and transfer in the Model
 ResultSetMetaData rsmd = rs.getMetaData();

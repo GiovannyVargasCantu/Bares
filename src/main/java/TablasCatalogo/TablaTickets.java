@@ -36,7 +36,7 @@ public class TablaTickets extends javax.swing.JFrame {
 String[] tableColumnsName = {"Ticket ID","Descripcion","Pago Total","Fecha","Metodo Pago","Comanda ID","Cajero ID"}; 
 DefaultTableModel aModel = (DefaultTableModel) jTable1.getModel();
 aModel.setColumnIdentifiers(tableColumnsName);
-ResultSet rs =  bd.CatalogoTickets();
+ResultSet rs =  bd.Catalogo(7);
 
 // Loop through the ResultSet and transfer in the Model
 ResultSetMetaData rsmd = rs.getMetaData();

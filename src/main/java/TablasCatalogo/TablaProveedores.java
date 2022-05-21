@@ -32,7 +32,7 @@ public class TablaProveedores extends javax.swing.JFrame {
 String[] tableColumnsName = {"ProveedorID","Nombre Compañia","Nombre Contacto","Telefono ","Direccion","Codigo Postal"}; 
 DefaultTableModel aModel = (DefaultTableModel) jTable1.getModel();
 aModel.setColumnIdentifiers(tableColumnsName);
-ResultSet rs =  bd.CatalogoProveedores();
+ResultSet rs =  bd.Catalogo(2);
 
 // Loop through the ResultSet and transfer in the Model
 ResultSetMetaData rsmd = rs.getMetaData();

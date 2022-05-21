@@ -32,7 +32,7 @@ public class TablaComandas extends javax.swing.JFrame {
 String[] tableColumnsName = {"Comanda ID","Importe","Mesero ID","Cajero ID","Mesa ID"}; 
 DefaultTableModel aModel = (DefaultTableModel) jTable1.getModel();
 aModel.setColumnIdentifiers(tableColumnsName);
-ResultSet rs =  bd.CatalogoComandas();
+ResultSet rs =  bd.Catalogo(8);
 
 // Loop through the ResultSet and transfer in the Model
 ResultSetMetaData rsmd = rs.getMetaData();

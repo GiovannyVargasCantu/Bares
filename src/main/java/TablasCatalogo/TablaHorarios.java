@@ -31,7 +31,7 @@ public class TablaHorarios extends javax.swing.JFrame {
 String[] tableColumnsName = {"Horario ID","Hora Entrada","Hora Salida"}; 
 DefaultTableModel aModel = (DefaultTableModel) jTable1.getModel();
 aModel.setColumnIdentifiers(tableColumnsName);
-ResultSet rs =  bd.CatalogoHorarios();
+ResultSet rs =  bd.Catalogo(4);
 
 // Loop through the ResultSet and transfer in the Model
 ResultSetMetaData rsmd = rs.getMetaData();

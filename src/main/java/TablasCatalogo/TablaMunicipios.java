@@ -32,7 +32,7 @@ public class TablaMunicipios extends javax.swing.JFrame {
 String[] tableColumnsName = {"Municipio ID","Estado ID","Descripcion"}; 
 DefaultTableModel aModel = (DefaultTableModel) jTable1.getModel();
 aModel.setColumnIdentifiers(tableColumnsName);
-ResultSet rs =  bd.CatalogoMunicipios();
+ResultSet rs =  bd.Catalogo(10);
 
 // Loop through the ResultSet and transfer in the Model
 ResultSetMetaData rsmd = rs.getMetaData();

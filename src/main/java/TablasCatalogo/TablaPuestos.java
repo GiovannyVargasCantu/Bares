@@ -32,7 +32,7 @@ public class TablaPuestos extends javax.swing.JFrame {
 String[] tableColumnsName = {"Puesto ID","Nombre Puesto","Descripcion","Salario"}; 
 DefaultTableModel aModel = (DefaultTableModel) jTable1.getModel();
 aModel.setColumnIdentifiers(tableColumnsName);
-ResultSet rs =  bd.CatalogoPuestos();
+ResultSet rs =  bd.Catalogo(5);
 
 // Loop through the ResultSet and transfer in the Model
 ResultSetMetaData rsmd = rs.getMetaData();

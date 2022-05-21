@@ -32,7 +32,7 @@ public class TablaFacturas extends javax.swing.JFrame {
 String[] tableColumnsName = {"Factura ID","Correo","RFC","Fecha","Ticket ID","Cliente ID"}; 
 DefaultTableModel aModel = (DefaultTableModel) jTable1.getModel();
 aModel.setColumnIdentifiers(tableColumnsName);
-ResultSet rs =  bd.CatalogoFacturas();
+ResultSet rs =  bd.Catalogo(6);
 
 // Loop through the ResultSet and transfer in the Model
 ResultSetMetaData rsmd = rs.getMetaData();
