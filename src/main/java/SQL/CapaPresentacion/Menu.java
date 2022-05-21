@@ -102,6 +102,11 @@ public class Menu extends javax.swing.JFrame {
         operacionButton.setBackground(new java.awt.Color(170, 170, 170));
         operacionButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fasff.png"))); // NOI18N
         operacionButton.setText("Operacion");
+        operacionButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                operacionButtonMouseClicked(evt);
+            }
+        });
         operacionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 operacionButtonActionPerformed(evt);
@@ -208,6 +213,14 @@ public class Menu extends javax.swing.JFrame {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_consultaButtonMouseClicked
+
+    private void operacionButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_operacionButtonMouseClicked
+        // TODO add your handling code here:
+        //Leave it to me!
+        Operaciones consulta = new Operaciones();
+        consulta.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_operacionButtonMouseClicked
 
     /**
      * @param args the command line arguments

@@ -4,6 +4,9 @@
  */
 package SQL.CapaPresentacion;
 
+import Alterar.AlterarMenu;
+import java.sql.SQLException;
+
 /**
  *
  * @author Giovanny Vargas
@@ -40,6 +43,11 @@ public class Operaciones extends javax.swing.JFrame {
         jButton3.setText("Generar Factura");
 
         jButton4.setText("Alterar");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -70,6 +78,14 @@ public class Operaciones extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+        //Leave it to me!
+        AlterarMenu consulta = new AlterarMenu();
+        consulta.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton4MouseClicked
 
     /**
      * @param args the command line arguments

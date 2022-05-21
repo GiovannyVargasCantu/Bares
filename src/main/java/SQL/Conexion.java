@@ -25,7 +25,7 @@ package SQL;
     
 public class Conexion {
     public static Connection conexion = null;
-    public static String cadenaconexion = "jdbc:sqlserver://localhost:1433;databaseName=Bares11;encrypt=true;trustServerCertificate=true";
+    public static String cadenaconexion = "jdbc:sqlserver://localhost:1433;databaseName=Bares12;encrypt=true;trustServerCertificate=true";
     public static boolean validacion = true;
     public Connection establecerConexion(){
          //System.out.println(usuario);
@@ -51,7 +51,7 @@ public class Conexion {
 
         try
         {
-           conexion = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Bares11;encrypt=true;trustServerCertificate=true","usersql","root2");
+           conexion = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Bares12;encrypt=true;trustServerCertificate=true","usersql","root2");
         } catch (SQLException e)
         {
             e.printStackTrace();
@@ -266,6 +266,41 @@ public class Conexion {
             e.printStackTrace();
         }
         return rs;
+    }
+
+    public void AgregarClientes(String Query) {
+       ResultSet rs = null;
+        try
+        {
+            // Se crea un Statement, para realizar la consulta
+            Statement s = conexion.createStatement();
+            String query = Query;
+
+            // Se realiza la consulta. Los resultados se guardan en el
+            // ResultSet rs
+            s.executeUpdate(query);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+     
+    }
+
+    public void ModificarClientes(String Query) {
+         ResultSet rs = null;
+        try
+        {
+            // Se crea un Statement, para realizar la consulta
+            Statement s = conexion.createStatement();
+            String query = Query;
+
+            // Se realiza la consulta. Los resultados se guardan en el
+            // ResultSet rs
+            s.executeUpdate(query);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }
 
