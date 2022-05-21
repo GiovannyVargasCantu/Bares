@@ -590,13 +590,13 @@ public class Consultas extends javax.swing.JFrame {
         ResultSet rs = bd.ConsultarBusqueda(Query);
         
         //We loop through ResultSet, as usual.
-        ResultSetMetaData rsmd;
+        ResultSetMetaData rsmd = null;
         try {
             rsmd = rs.getMetaData();
         } catch (SQLException ex) {
             Logger.getLogger(Consultas.class.getName()).log(Level.SEVERE, null, ex);
         }
-        int colNo;
+        int colNo = 0;
         try {
             colNo = rsmd.getColumnCount();
         } catch (SQLException ex) {
