@@ -573,11 +573,11 @@ public class Consultas extends javax.swing.JFrame {
                 if(fechaCheckbox.isSelected()) {
                     Query = "SELECT * FROM Ticket WHERE " + dateQuery + " ORDER BY Fecha " + orderQuery;
                 } else {
-                    Query = "SELECT * FROM Ticket WHERE " + idQuery + " ORDER BY EmpleadoID " + orderQuery;
+                    Query = "SELECT * FROM Ticket WHERE " + idQuery + " ORDER BY Fecha " + orderQuery;
                 }   break;
             case 2:
                 Query = "SELECT * FROM Ticket WHERE " + dateQuery + " AND " + idQuery +
-                        " ORDER BY Fecha " + orderQuery + ", EmpleadoID " + orderQuery;
+                        " ORDER BY Fecha " + orderQuery;
                 break;
             default:
                 break;
@@ -603,6 +603,7 @@ public class Consultas extends javax.swing.JFrame {
             Logger.getLogger(Consultas.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
+            aModel.setRowCount(0);
             while(rs.next()){
                 Object[] objects = new Object[colNo];
                 

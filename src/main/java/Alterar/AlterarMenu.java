@@ -4,7 +4,9 @@
  */
 package Alterar;
 
+import SQL.CapaPresentacion.Operaciones;
 import SQL.Conexion;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -12,6 +14,7 @@ import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.AbstractButton;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.table.DefaultTableModel;
 
@@ -37,8 +40,8 @@ public class AlterarMenu extends javax.swing.JFrame {
         TarjetaBancariaTexto.setEnabled(false);
         NumeroTelefonoContactoTexto.setEnabled(false);
         //Modificar
-        IndiceClienteIDModficar.setEnabled(false);
-        //DELETE, MAYBE
+        IndiceClienteIDModificar.setEnabled(false);
+        buscarButton.setEnabled(false);
         //ClienteIDModificar.setEnabled(false);
         NombreClienteModificar.setEnabled(false);
         ApellidoClienteModificar.setEnabled(false);
@@ -65,12 +68,9 @@ public class AlterarMenu extends javax.swing.JFrame {
         NumeroTelefonoContactoTexto.setEnabled(true);
     }
     private void InicializarModificar(){
-        IndiceClienteIDModficar.setEnabled(true);
+        IndiceClienteIDModificar.setEnabled(true);
         //ClienteIDModificar.setEnabled(true);
-        NombreClienteModificar.setEnabled(true);
-        ApellidoClienteModificar.setEnabled(true);
-        TarjetaBancariaModificar.setEnabled(true);
-        NumeroTelefonoContactoModificar.setEnabled(true);
+        
         /*ClienteIDRadioModificar.setEnabled(true);
         NombreClienteRadioModificar.setEnabled(true);
         ApellidosClienteRadioModificar.setEnabled(true);
@@ -95,7 +95,7 @@ public class AlterarMenu extends javax.swing.JFrame {
         NumeroTelefonoContactoTexto.setEnabled(false);
     }
     private void OcultarModificar() {
-        IndiceClienteIDModficar.setEnabled(false);
+        IndiceClienteIDModificar.setEnabled(false);
         /*ClienteIDModificar.setEnabled(false);*/
         NombreClienteModificar.setEnabled(false);
         ApellidoClienteModificar.setEnabled(false);
@@ -141,7 +141,8 @@ public class AlterarMenu extends javax.swing.JFrame {
        Query = "(" +ClienteID+ ",'"+NombreCliente+"','"+ApellidoCliente+"','"+TarjetaBancaria+"','"+NumeroTelefonoContacto+"');";
        bd = new Conexion();        
        bd.AgregarDatos(Query, 1);
-       bd.cierraConexion();
+       
+       JOptionPane.showMessageDialog(null, "Cliente agregado con éxito.");
      }
      //Este Metodo es WIP debido a que debemos hacer las validaciones por cada boton, es decir el usuario es capaz de modificar en teoria todos los atributos de la tabla, pero a su vez puede modificar
      //solo unos cuantos, por lo que hay que modificar el query para cada forma posible
@@ -192,7 +193,8 @@ public class AlterarMenu extends javax.swing.JFrame {
          
          bd = new Conexion();
          bd.ModificarDatos(Query, 1);
-         bd.cierraConexion();
+         
+         JOptionPane.showMessageDialog(null, "Cliente modificado con éxito.");
 
      }
      //Este Metodo funciona a la perfeccion
@@ -215,8 +217,9 @@ public class AlterarMenu extends javax.swing.JFrame {
                 Query = "DELETE FROM Cliente WHERE NumeroClienteContacto='"+NumeroTelefonoContacto+"';";
             }
             bd = new Conexion();
-            bd.EliminarClientes(Query);
-            bd.cierraConexion();
+            bd.EliminarDatos(Query);
+            
+            JOptionPane.showMessageDialog(null, "Cliente eliminado con éxito.");
     }
 
     /**
@@ -233,7 +236,7 @@ public class AlterarMenu extends javax.swing.JFrame {
         OpcionesDatos = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        regresarButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         ClienteIDTexto = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -253,7 +256,7 @@ public class AlterarMenu extends javax.swing.JFrame {
         ApellidoClienteModificar = new javax.swing.JTextField();
         TarjetaBancariaModificar = new javax.swing.JTextField();
         NumeroTelefonoContactoModificar = new javax.swing.JTextField();
-        IndiceClienteIDModficar = new javax.swing.JTextField();
+        IndiceClienteIDModificar = new javax.swing.JTextField();
         buscarButton = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -291,7 +294,17 @@ public class AlterarMenu extends javax.swing.JFrame {
 
         jLabel2.setText("Clientes");
 
-        jButton2.setText("Regresar");
+        regresarButton.setText("Regresar");
+        regresarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                regresarButtonMouseClicked(evt);
+            }
+        });
+        regresarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regresarButtonActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(10, 10, 10, 10, new java.awt.Color(0, 0, 0)));
 
@@ -437,7 +450,7 @@ public class AlterarMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(buscarButton)
-                            .addComponent(IndiceClienteIDModficar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(IndiceClienteIDModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -458,7 +471,7 @@ public class AlterarMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(IndiceClienteIDModficar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(IndiceClienteIDModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buscarButton)
@@ -591,7 +604,7 @@ public class AlterarMenu extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(regresarButton)
                         .addGap(106, 106, 106))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -623,7 +636,7 @@ public class AlterarMenu extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addGap(26, 26, 26))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(regresarButton)
                         .addGap(16, 16, 16))))
         );
 
@@ -703,24 +716,44 @@ public class AlterarMenu extends javax.swing.JFrame {
     private void buscarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarButtonMouseClicked
         try {
             // TODO add your handling code here:
-            bd = new Conexion();
-            ResultSet rs = bd.ObtenerDatos(1, "1");
-            bd.cierraConexion();
+            NombreClienteModificar.setEnabled(false);
+            ApellidoClienteModificar.setEnabled(false);
+            TarjetaBancariaModificar.setEnabled(false);
+            NumeroTelefonoContactoModificar.setEnabled(false);
             
-            while(rs.next()) {
-                
-                IDModificacion.setText(rs.getString("ClienteID"));
-                NombreClienteModificar.setText(rs.getString("Nombre"));
-                ApellidoClienteModificar.setText(rs.getString("Apellido"));
-                TarjetaBancariaModificar.setText(rs.getString("TarjetaBancaria"));
-                NumeroTelefonoContactoModificar.setText(rs.getString("NumeroClienteContacto"));
-                
-            }
+            bd = new Conexion();
+            String idBuscado = IndiceClienteIDModificar.getText();
+            ResultSet rs = bd.ObtenerDatos(1, idBuscado);
+            
+            rs.next();
+            IDModificacion.setText(rs.getString(1));
+            NombreClienteModificar.setText(rs.getString(2));
+            ApellidoClienteModificar.setText(rs.getString(3));
+            TarjetaBancariaModificar.setText(rs.getString(4));
+            NumeroTelefonoContactoModificar.setText(rs.getString(5));
+            
+            NombreClienteModificar.setEnabled(true);
+            ApellidoClienteModificar.setEnabled(true);
+            TarjetaBancariaModificar.setEnabled(true);
+            NumeroTelefonoContactoModificar.setEnabled(true);
+               
+            
             
         } catch (SQLException ex) {
             Logger.getLogger(AlterarMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_buscarButtonMouseClicked
+
+    private void regresarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_regresarButtonActionPerformed
+
+    private void regresarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regresarButtonMouseClicked
+        // TODO add your handling code here:
+        Operaciones operaciones = new Operaciones();
+        operaciones.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_regresarButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -764,7 +797,7 @@ public class AlterarMenu extends javax.swing.JFrame {
     private javax.swing.JRadioButton ClienteIDRadioEliminar;
     private javax.swing.JTextField ClienteIDTexto;
     private javax.swing.JTextField IDModificacion;
-    private javax.swing.JTextField IndiceClienteIDModficar;
+    private javax.swing.JTextField IndiceClienteIDModificar;
     private javax.swing.JTextField NombreClienteModificar;
     private javax.swing.JTextField NombreClienteTexto;
     private javax.swing.JTextField NumeroTelefonoContactoEliminar;
@@ -779,7 +812,6 @@ public class AlterarMenu extends javax.swing.JFrame {
     private javax.swing.JButton buscarButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -800,6 +832,7 @@ public class AlterarMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JButton regresarButton;
     // End of variables declaration//GEN-END:variables
 
   

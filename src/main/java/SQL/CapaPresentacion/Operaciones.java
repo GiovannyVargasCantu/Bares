@@ -33,6 +33,7 @@ public class Operaciones extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        BotonRegresoConsultas1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,6 +47,13 @@ public class Operaciones extends javax.swing.JFrame {
         jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton4MouseClicked(evt);
+            }
+        });
+
+        BotonRegresoConsultas1.setText("Regresar");
+        BotonRegresoConsultas1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BotonRegresoConsultas1MouseClicked(evt);
             }
         });
 
@@ -63,6 +71,10 @@ public class Operaciones extends javax.swing.JFrame {
                 .addGap(173, 173, 173)
                 .addComponent(jButton4)
                 .addContainerGap(173, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BotonRegresoConsultas1)
+                .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -73,7 +85,9 @@ public class Operaciones extends javax.swing.JFrame {
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
+                .addComponent(BotonRegresoConsultas1)
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -86,6 +100,13 @@ public class Operaciones extends javax.swing.JFrame {
         consulta.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton4MouseClicked
+
+    private void BotonRegresoConsultas1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonRegresoConsultas1MouseClicked
+        // TODO add your handling code here:
+        Menu menu = new Menu();
+        menu.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_BotonRegresoConsultas1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -123,6 +144,7 @@ public class Operaciones extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonRegresoConsultas1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

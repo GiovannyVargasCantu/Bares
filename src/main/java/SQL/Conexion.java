@@ -25,7 +25,7 @@ package SQL;
     
 public class Conexion {
     public static Connection conexion = null;
-    public static String cadenaconexion = "jdbc:sqlserver://localhost:1433;databaseName=Bares12;encrypt=true;trustServerCertificate=true";
+    public static String cadenaconexion = "jdbc:sqlserver://localhost:1433;databaseName=Bares13;encrypt=true;trustServerCertificate=true";
     public static boolean validacion = true;
     public Connection establecerConexion(){
          //System.out.println(usuario);
@@ -240,7 +240,7 @@ public class Conexion {
         {
             // Se crea un Statement, para realizar la consulta
             Statement s = conexion.createStatement();
-            String query = "UPDATE " + TablaModificar + Query;
+            String query = "UPDATE " + TablaModificar + " "+ Query;
 
             // Se realiza la consulta. Los resultados se guardan en el
             // ResultSet rs
@@ -251,7 +251,7 @@ public class Conexion {
         }
     }
 
-    public void EliminarClientes(String Query) {
+    public void EliminarDatos(String Query) {
         ResultSet rs = null;
         try
         {
@@ -312,7 +312,7 @@ public class Conexion {
         ResultSet rs = null;
         try {
             Statement s = conexion.createStatement();
-            String query = "SLECT * FROM " + TablaModificar + " WHERE " + IDBuscado + " = " + Buscado;
+            String query = "SELECT * FROM " + TablaModificar + " WHERE " + IDBuscado + " = " + Buscado;
             
             rs = s.executeQuery(query);
             
