@@ -17,6 +17,7 @@ package SQL;
     import java.sql.ResultSet;
     import java.sql.SQLException;
     import java.sql.Statement;
+import java.util.ArrayList;
     import javax.swing.JOptionPane;
 
 //import javax.swing.JTable;
@@ -395,5 +396,110 @@ public class Conexion {
         }
         return rs;
     }
+
+    public String[] ObtenerNombreTablas() {
+        ResultSet rs = null;
+        ArrayList<String> list = new ArrayList<String>();
+        String[] tablas = null;
+        try {
+            Statement s = conexion.createStatement();
+            String query = "SELECT name\n" +
+"FROM sys.Tables";
+            
+            rs = s.executeQuery(query);
+            while(rs.next()){
+                list.add(rs.getString(1));
+            }
+            tablas = new String[list.size()];
+            list.toArray(tablas);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tablas;
+    }
+
+    public String[] ObtenerNombreColumnas(int NombreTabla) {
+        String Tabla = null;
+        switch(NombreTabla) {
+            case 1:
+                Tabla = "Cliente";
+            break;
+            case 2:
+                Tabla = "Proveedor";
+            break;
+            case 3:
+                Tabla = "Empleado";
+            break;
+            case 4:
+                Tabla = "Horario";
+            break;
+            case 5:
+                Tabla = "Puesto";
+            break;
+            case 6:
+                Tabla = "Factura";
+            break;
+            case 7:
+                Tabla = "Ticket";
+            break;
+            case 8:
+                Tabla = "Comanda";
+            break;
+            case 9:
+                Tabla = "Estados";
+            break;
+            case 10:
+                Tabla = "Municipios";
+            break;
+            case 11:
+                Tabla = "Productos";
+            break;
+            case 12:
+                Tabla = "DetalleComanda";
+            break;
+            case 13:
+                 Tabla = "DetalleProveedor"; //TODO
+            break;
+            case 14:
+                 Tabla = "DetalleTicket"; //TODO
+            break;
+            case 15: 
+                 Tabla = "Mesas"; //TODO
+            break;
+            case 16: 
+                 Tabla = "MeseroAtiendeMesa"; //TODO
+            break;
+            case 17:
+                 Tabla = "TipoProducto"; //TODO
+            break;
+            case 18: 
+                 Tabla = "Usuarios"; //TODO
+            break;
+            //Add some more!
+        }
+        
+        ResultSet rs = null;
+        ArrayList<String> list = new ArrayList<String>();
+        String[] tablas = null;
+        try {
+            Statement s = conexion.createStatement();
+            String query = "SELECT COLUMN_NAME\n" +
+"FROM INFORMATION_SCHEMA.COLUMNS\n" +
+"WHERE TABLE_NAME = N'"+Tabla+"'";
+            
+            rs = s.executeQuery(query);
+            while(rs.next()){
+                list.add(rs.getString(1));
+            }
+            tablas = new String[list.size()];
+            list.toArray(tablas);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tablas;
+    }
+   
 }
 

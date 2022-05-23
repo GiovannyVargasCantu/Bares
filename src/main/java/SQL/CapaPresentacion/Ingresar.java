@@ -25,11 +25,13 @@ public final class Ingresar extends javax.swing.JFrame {
         mostrarFecha();
         mostrarTiempo();
     }
-
+   
+    
+   
  
     
     public static String usuario;
-    public static String contrasenia;
+    public static String contrasenia; 
     
     void mostrarFecha(){
         Date fecha = new Date();
@@ -195,8 +197,8 @@ public final class Ingresar extends javax.swing.JFrame {
 
     private void BotonIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonIngresarMouseClicked
         // TODO add your handling code here:
-        usuario = UsuarioTxtField.getText(); //Obtiene los "valores" tanto del usuario como contraseña, esto es como un ngmodel
-        contrasenia = ContraseniaTxtField.getText(); //Aparece en amarillo getText de contrasenia porque "It's not longer supported by Java, something like that, doesn't affect our proyect"
+        usuario = UsuarioTxtField.getText();//Obtiene los "valores" tanto del usuario como contraseña, esto es como un ngmodel
+        contrasenia = ContraseniaTxtField.getText();//Aparece en amarillo getText de contrasenia porque "It's not longer supported by Java, something like that, doesn't affect our proyect"
         Conexion con = new Conexion();
         con.establecerConexion();
         if(Conexion.validacion){ 

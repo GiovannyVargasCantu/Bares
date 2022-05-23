@@ -5,26 +5,13 @@
 package SQL.CapaPresentacion;
 
 import SQL.Conexion;
-import TablasCatalogo.TablaProveedores;
-import TablasCatalogo.TablaClientes;
-import TablasCatalogo.TablaComandas;
-import TablasCatalogo.TablaEmpleados;
-import TablasCatalogo.TablaEstados;
-import TablasCatalogo.TablaFacturas;
-import TablasCatalogo.TablaHorarios;
-import TablasCatalogo.TablaMunicipios;
-import TablasCatalogo.TablaProductos;
-import TablasCatalogo.TablaPuestos;
-import TablasCatalogo.TablaTickets;
+
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-//import java.sql.SQLException;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
 
 /**
  *
@@ -45,17 +32,15 @@ public class Catalogo extends javax.swing.JFrame {
  private Conexion bd;
  int elegir;
  String OpcionElegida;
-// String[] InicializarTabla;
- String[] IdentificadorColumnaCliente= {"Cliente ID","Nombre","Apellidos","Tarjeta Bancaria","Numero Telefonico"};
- String[] IdentificadorColumnaEmpleado= {"Empleado ID","Nombre","Apellidos","Correo","Lugar Nacimiento","Horario","Municipio","Estado","Gerente","Puesto"}; 
+ String[] IdentificadorColumnas = null;
+ String[] NombreTablas =  ObtenerTablas();
  
- private void MostrarTabla(String[] IdentificadorColumnas,int tabla) throws SQLException{
-     bd = new Conexion();       
-
+ private void MostrarTabla(int tabla) throws SQLException{
+     bd = new Conexion(); 
+     IdentificadorColumnas = bd.ObtenerNombreColumnas(tabla);
+     //System.out.println(Arrays.toString(IdentificadorColumnas));
 DefaultTableModel aModel = (DefaultTableModel) jTable1.getModel();
- aModel.setRowCount(0);
-     //System.out.println("HOLA");
-//aModel.setColumnIdentifiers(InicializarTabla);
+aModel.setRowCount(0);
 aModel.setColumnIdentifiers(IdentificadorColumnas);
 ResultSet rs =  bd.Catalogo(tabla);
 
@@ -73,6 +58,15 @@ while(rs.next()){
 jTable1.setModel(aModel);
  }
 
+    private String[] ObtenerTablas() {
+        bd = new Conexion();
+        return bd.ObtenerNombreTablas();
+    }
+
+    private String[] ObtenerColumnas(int NombreTablas) {
+        bd = new Conexion();
+        return bd.ObtenerNombreColumnas(NombreTablas);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,37 +76,12 @@ jTable1.setModel(aModel);
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BotonClientes = new javax.swing.JButton();
         BotonRegresoConsultas = new javax.swing.JButton();
-        BotonProveedores = new javax.swing.JButton();
-        BotonEmpleados = new javax.swing.JButton();
-        BotonHorarios = new javax.swing.JButton();
-        BotonPuestos = new javax.swing.JButton();
-        BotonProductos = new javax.swing.JButton();
-        BotonFacturas = new javax.swing.JButton();
-        BotonTickets = new javax.swing.JButton();
-        BotonComandas = new javax.swing.JButton();
-        BotonEstados = new javax.swing.JButton();
-        BotonMunicipios = new javax.swing.JButton();
-        BotonDetalleComanda = new javax.swing.JButton();
-        BotonDetalleProveedor = new javax.swing.JButton();
-        BotonDetalleTicket = new javax.swing.JButton();
-        BotonMesas = new javax.swing.JButton();
-        BotonMeseroAtiendeMesa = new javax.swing.JButton();
-        BotonTipoProducto = new javax.swing.JButton();
-        BotonUsuarios = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        BotonClientes.setText("Clientes");
-        BotonClientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonClientesMouseClicked(evt);
-            }
-        });
 
         BotonRegresoConsultas.setText("Regresar");
         BotonRegresoConsultas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -121,226 +90,55 @@ jTable1.setModel(aModel);
             }
         });
 
-        BotonProveedores.setText("Proveedores");
-        BotonProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonProveedoresMouseClicked(evt);
-            }
-        });
-
-        BotonEmpleados.setText("Empleados");
-        BotonEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonEmpleadosMouseClicked(evt);
-            }
-        });
-
-        BotonHorarios.setText("Horarios");
-        BotonHorarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonHorariosMouseClicked(evt);
-            }
-        });
-
-        BotonPuestos.setText("Puestos");
-        BotonPuestos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonPuestosMouseClicked(evt);
-            }
-        });
-
-        BotonProductos.setText("Productos");
-        BotonProductos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonProductosMouseClicked(evt);
-            }
-        });
-
-        BotonFacturas.setText("Facturas");
-        BotonFacturas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonFacturasMouseClicked(evt);
-            }
-        });
-
-        BotonTickets.setText("Tickets");
-        BotonTickets.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonTicketsMouseClicked(evt);
-            }
-        });
-
-        BotonComandas.setText("Comandas");
-        BotonComandas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonComandasMouseClicked(evt);
-            }
-        });
-
-        BotonEstados.setText("Estados");
-        BotonEstados.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonEstadosMouseClicked(evt);
-            }
-        });
-
-        BotonMunicipios.setText("Municipios");
-        BotonMunicipios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BotonMunicipiosMouseClicked(evt);
-            }
-        });
-
-        BotonDetalleComanda.setText("Detalle Comanda");
-
-        BotonDetalleProveedor.setText("Detalle Proveedor");
-
-        BotonDetalleTicket.setText("Detalle Ticket");
-
-        BotonMesas.setText("Mesas");
-
-        BotonMeseroAtiendeMesa.setText("Mesero Atiende Mesa");
-
-        BotonTipoProducto.setText("Tipo Producto");
-
-        BotonUsuarios.setText("Usuarios");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Clientes","Empleados"}));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(NombreTablas));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(129, 129, 129)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BotonRegresoConsultas)
-                .addGap(43, 43, 43))
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(BotonFacturas)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(BotonTickets))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(BotonClientes)
-                                .addGap(67, 67, 67)
-                                .addComponent(BotonEmpleados)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(66, 66, 66)
-                                .addComponent(BotonProveedores))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(77, 77, 77)
-                                .addComponent(BotonComandas)))
-                        .addGap(60, 60, 60)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BotonHorarios)
-                            .addComponent(BotonEstados))
-                        .addGap(64, 64, 64)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(BotonPuestos)
-                                .addGap(74, 74, 74)
-                                .addComponent(BotonProductos))
-                            .addComponent(BotonMunicipios)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(BotonDetalleComanda)
-                                .addGap(65, 65, 65)
-                                .addComponent(BotonDetalleProveedor))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(BotonMeseroAtiendeMesa)
-                                .addGap(51, 51, 51)
-                                .addComponent(BotonTipoProducto)))
-                        .addGap(64, 64, 64)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BotonUsuarios)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(BotonDetalleTicket)
-                                .addGap(88, 88, 88)
-                                .addComponent(BotonMesas)
-                                .addGap(125, 125, 125)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(127, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(BotonRegresoConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BotonClientes)
-                    .addComponent(BotonProveedores)
-                    .addComponent(BotonEmpleados)
-                    .addComponent(BotonHorarios)
-                    .addComponent(BotonPuestos)
-                    .addComponent(BotonProductos))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BotonFacturas)
-                    .addComponent(BotonTickets)
-                    .addComponent(BotonComandas)
-                    .addComponent(BotonEstados)
-                    .addComponent(BotonMunicipios))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(BotonDetalleComanda)
-                            .addComponent(BotonDetalleProveedor)
-                            .addComponent(BotonDetalleTicket)
-                            .addComponent(BotonMesas)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(61, 61, 61)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BotonMeseroAtiendeMesa)
-                    .addComponent(BotonTipoProducto)
-                    .addComponent(BotonUsuarios))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(BotonRegresoConsultas)
-                        .addGap(26, 26, 26))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BotonRegresoConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void BotonClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonClientesMouseClicked
-        try {
-            // TODO add your handling code here:
-            TablaClientes tabla = new TablaClientes();
-            tabla.setVisible(true);
-            dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(Catalogo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_BotonClientesMouseClicked
 
     private void BotonRegresoConsultasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonRegresoConsultasMouseClicked
         // TODO add your handling code here:
@@ -349,138 +147,77 @@ jTable1.setModel(aModel);
         dispose();
     }//GEN-LAST:event_BotonRegresoConsultasMouseClicked
 
-    private void BotonProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonProveedoresMouseClicked
-        try {
-            // TODO add your handling code here:
-            TablaProveedores tabla = new TablaProveedores();
-            tabla.setVisible(true);
-            dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(Catalogo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_BotonProveedoresMouseClicked
-
-    private void BotonEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonEmpleadosMouseClicked
-        // TODO add your handling code here:
-        try {
-            // TODO add your handling code here:
-            TablaEmpleados tabla = new TablaEmpleados();
-            tabla.setVisible(true);
-            dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(Catalogo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_BotonEmpleadosMouseClicked
-
-    private void BotonHorariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonHorariosMouseClicked
-        // TODO add your handling code here:
-        try {
-            // TODO add your handling code here:
-            TablaHorarios tabla = new TablaHorarios();
-            tabla.setVisible(true);
-            dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(Catalogo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_BotonHorariosMouseClicked
-
-    private void BotonPuestosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonPuestosMouseClicked
-        try {
-            // TODO add your handling code here:
-            TablaPuestos tabla = new TablaPuestos();
-            tabla.setVisible(true);
-            dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(Catalogo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_BotonPuestosMouseClicked
-
-    private void BotonProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonProductosMouseClicked
-        try {
-            // TODO add your handling code here:
-            TablaProductos tabla = new TablaProductos();
-            tabla.setVisible(true);
-            dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(Catalogo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_BotonProductosMouseClicked
-
-    private void BotonFacturasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonFacturasMouseClicked
-        try {
-            // TODO add your handling code here:
-            TablaFacturas tabla = new TablaFacturas();
-            tabla.setVisible(true);
-            dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(Catalogo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_BotonFacturasMouseClicked
-
-    private void BotonTicketsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonTicketsMouseClicked
-        try {
-            // TODO add your handling code here:
-            TablaTickets tabla = new TablaTickets();
-            tabla.setVisible(true);
-            dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(Catalogo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_BotonTicketsMouseClicked
-
-    private void BotonComandasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonComandasMouseClicked
-        try {
-            // TODO add your handling code here:
-            TablaComandas tabla = new TablaComandas();
-            tabla.setVisible(true);
-            dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(Catalogo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_BotonComandasMouseClicked
-
-    private void BotonEstadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonEstadosMouseClicked
-        try {
-            // TODO add your handling code here:
-            TablaEstados tabla = new TablaEstados();
-            tabla.setVisible(true);
-            dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(Catalogo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_BotonEstadosMouseClicked
-
-    private void BotonMunicipiosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonMunicipiosMouseClicked
-        try {
-            // TODO add your handling code here:
-            TablaMunicipios tabla = new TablaMunicipios();
-            tabla.setVisible(true);
-            dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(Catalogo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_BotonMunicipiosMouseClicked
-
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        try {
+       
+            try {
             // TODO add your handling code here:
             OpcionElegida = jComboBox1.getSelectedItem().toString();
+            System.out.println(OpcionElegida);
             
-            
-            
+           
             elegir = 0;
             
-            if(OpcionElegida.equals("Clientes")) elegir = 1;
-            if(OpcionElegida.equals("Empleados")) elegir = 2;
+            if(OpcionElegida.equals("Cliente")) elegir = 1;
+            if(OpcionElegida.equals("Proveedor")) elegir = 2;
+            if(OpcionElegida.equals("Empleado")) elegir = 3;
+            if(OpcionElegida.equals("Horario")) elegir = 4;
+            if(OpcionElegida.equals("Puesto")) elegir = 5;
+            if(OpcionElegida.equals("Factura")) elegir = 6;
+            if(OpcionElegida.equals("Ticket")) elegir = 7;
+            if(OpcionElegida.equals("Comanda")) elegir = 8;
+            if(OpcionElegida.equals("Estados")) elegir = 9;
+            if(OpcionElegida.equals("Municipios")) elegir = 10;
+            if(OpcionElegida.equals("Productos")) elegir = 11;
+            if(OpcionElegida.equals("DetalleComanda")) elegir = 12;
+            if(OpcionElegida.equals("DetalleProveedor")) elegir = 13;
+            if(OpcionElegida.equals("DetalleTicket")) elegir = 14;
+            if(OpcionElegida.equals("Mesas")) elegir = 15;
+            if(OpcionElegida.equals("MeseroAtiendeMesa")) elegir = 16;
+            if(OpcionElegida.equals("TipoProducto")) elegir = 17;
+            if(OpcionElegida.equals("Usuarios")) elegir = 18;
+            //IdentificadorColumnas = ObtenerColumnas(elegir);
             switch(elegir){
-                case 1: MostrarTabla(IdentificadorColumnaCliente,1);
-                break; 
-                case 2: MostrarTabla(IdentificadorColumnaEmpleado,3);
-                    break;
+            case 1: MostrarTabla(1);
+            break;
+            case 2: MostrarTabla(2);
+            break;
+            case 3: MostrarTabla(3);
+            break;
+            case 4: MostrarTabla(4);
+            break;
+            case 5: MostrarTabla(5);
+            break;
+            case 6: MostrarTabla(6);
+            break;
+            case 7: MostrarTabla(7);
+            break;
+            case 8: MostrarTabla(8);
+            break;
+            case 9: MostrarTabla(9);
+            break;
+            case 10: MostrarTabla(10);
+            break;
+            case 11: MostrarTabla(11);
+            break;
+            case 12: MostrarTabla(12);
+            break;
+            case 13: MostrarTabla(13);
+            break;
+            case 14: MostrarTabla(14);
+            break;
+            case 15: MostrarTabla(15);
+            break;
+            case 16: MostrarTabla(16);
+            break;
+            case 17: MostrarTabla(17);
+            break;
+            case 18: MostrarTabla(18);
+            break;
             }
-        } catch (SQLException ex) {
+            } catch (SQLException ex) {
             Logger.getLogger(Catalogo.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            }
+      
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
@@ -524,27 +261,10 @@ jTable1.setModel(aModel);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BotonClientes;
-    private javax.swing.JButton BotonComandas;
-    private javax.swing.JButton BotonDetalleComanda;
-    private javax.swing.JButton BotonDetalleProveedor;
-    private javax.swing.JButton BotonDetalleTicket;
-    private javax.swing.JButton BotonEmpleados;
-    private javax.swing.JButton BotonEstados;
-    private javax.swing.JButton BotonFacturas;
-    private javax.swing.JButton BotonHorarios;
-    private javax.swing.JButton BotonMesas;
-    private javax.swing.JButton BotonMeseroAtiendeMesa;
-    private javax.swing.JButton BotonMunicipios;
-    private javax.swing.JButton BotonProductos;
-    private javax.swing.JButton BotonProveedores;
-    private javax.swing.JButton BotonPuestos;
     private javax.swing.JButton BotonRegresoConsultas;
-    private javax.swing.JButton BotonTickets;
-    private javax.swing.JButton BotonTipoProducto;
-    private javax.swing.JButton BotonUsuarios;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
 }
