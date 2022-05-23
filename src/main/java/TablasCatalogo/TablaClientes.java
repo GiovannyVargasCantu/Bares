@@ -106,10 +106,14 @@ jTable1.setModel(aModel);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonRegresoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonRegresoMouseClicked
-        // TODO add your handling code here:
-        Catalogo catalogo = new Catalogo();
-        catalogo.setVisible(true);
-        dispose();
+        try {
+            // TODO add your handling code here:
+            Catalogo catalogo = new Catalogo();
+            catalogo.setVisible(true);
+            dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(TablaClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BotonRegresoMouseClicked
 
     /**

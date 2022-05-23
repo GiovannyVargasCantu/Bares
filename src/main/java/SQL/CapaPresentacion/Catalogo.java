@@ -4,6 +4,7 @@
  */
 package SQL.CapaPresentacion;
 
+import SQL.Conexion;
 import TablasCatalogo.TablaProveedores;
 import TablasCatalogo.TablaClientes;
 import TablasCatalogo.TablaComandas;
@@ -15,9 +16,12 @@ import TablasCatalogo.TablaMunicipios;
 import TablasCatalogo.TablaProductos;
 import TablasCatalogo.TablaPuestos;
 import TablasCatalogo.TablaTickets;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 //import java.sql.SQLException;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
@@ -31,11 +35,43 @@ public class Catalogo extends javax.swing.JFrame {
     /**
      * Creates new form Consultas
      */
-    public Catalogo() {
+    
+    
+    
+    public Catalogo() throws SQLException {
         initComponents();
     }
     
+ private Conexion bd;
+ int elegir;
+ String OpcionElegida;
+// String[] InicializarTabla;
+ String[] IdentificadorColumnaCliente= {"Cliente ID","Nombre","Apellidos","Tarjeta Bancaria","Numero Telefonico"};
+ String[] IdentificadorColumnaEmpleado= {"Empleado ID","Nombre","Apellidos","Correo","Lugar Nacimiento","Horario","Municipio","Estado","Gerente","Puesto"}; 
  
+ private void MostrarTabla(String[] IdentificadorColumnas,int tabla) throws SQLException{
+     bd = new Conexion();       
+
+DefaultTableModel aModel = (DefaultTableModel) jTable1.getModel();
+ aModel.setRowCount(0);
+     //System.out.println("HOLA");
+//aModel.setColumnIdentifiers(InicializarTabla);
+aModel.setColumnIdentifiers(IdentificadorColumnas);
+ResultSet rs =  bd.Catalogo(tabla);
+
+// Loop through the ResultSet and transfer in the Model
+ResultSetMetaData rsmd = rs.getMetaData();
+int colNo = rsmd.getColumnCount();
+while(rs.next()){
+ Object[] objects = new Object[colNo];
+ // tanks to umit ozkan for the bug fix!
+ for(int i=0;i<colNo;i++){
+  objects[i]=rs.getObject(i+1);
+  }
+ aModel.addRow(objects);
+}
+jTable1.setModel(aModel);
+ }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,6 +94,16 @@ public class Catalogo extends javax.swing.JFrame {
         BotonComandas = new javax.swing.JButton();
         BotonEstados = new javax.swing.JButton();
         BotonMunicipios = new javax.swing.JButton();
+        BotonDetalleComanda = new javax.swing.JButton();
+        BotonDetalleProveedor = new javax.swing.JButton();
+        BotonDetalleTicket = new javax.swing.JButton();
+        BotonMesas = new javax.swing.JButton();
+        BotonMeseroAtiendeMesa = new javax.swing.JButton();
+        BotonTipoProducto = new javax.swing.JButton();
+        BotonUsuarios = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -145,44 +191,98 @@ public class Catalogo extends javax.swing.JFrame {
             }
         });
 
+        BotonDetalleComanda.setText("Detalle Comanda");
+
+        BotonDetalleProveedor.setText("Detalle Proveedor");
+
+        BotonDetalleTicket.setText("Detalle Ticket");
+
+        BotonMesas.setText("Mesas");
+
+        BotonMeseroAtiendeMesa.setText("Mesero Atiende Mesa");
+
+        BotonTipoProducto.setText("Tipo Producto");
+
+        BotonUsuarios.setText("Usuarios");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Clientes","Empleados"}));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(129, 129, 129)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BotonRegresoConsultas)
                 .addGap(43, 43, 43))
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(BotonFacturas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BotonTickets))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(BotonClientes)
-                        .addGap(67, 67, 67)
-                        .addComponent(BotonEmpleados)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addComponent(BotonProveedores))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(BotonFacturas)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BotonTickets))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(BotonClientes)
+                                .addGap(67, 67, 67)
+                                .addComponent(BotonEmpleados)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(66, 66, 66)
+                                .addComponent(BotonProveedores))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(77, 77, 77)
+                                .addComponent(BotonComandas)))
+                        .addGap(60, 60, 60)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BotonHorarios)
+                            .addComponent(BotonEstados))
+                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(BotonPuestos)
+                                .addGap(74, 74, 74)
+                                .addComponent(BotonProductos))
+                            .addComponent(BotonMunicipios)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addComponent(BotonComandas)))
-                .addGap(60, 60, 60)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BotonHorarios)
-                    .addComponent(BotonEstados))
-                .addGap(64, 64, 64)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(BotonPuestos)
-                        .addGap(74, 74, 74)
-                        .addComponent(BotonProductos))
-                    .addComponent(BotonMunicipios))
-                .addContainerGap(86, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(BotonDetalleComanda)
+                                .addGap(65, 65, 65)
+                                .addComponent(BotonDetalleProveedor))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(BotonMeseroAtiendeMesa)
+                                .addGap(51, 51, 51)
+                                .addComponent(BotonTipoProducto)))
+                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BotonUsuarios)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(BotonDetalleTicket)
+                                .addGap(88, 88, 88)
+                                .addComponent(BotonMesas)
+                                .addGap(125, 125, 125)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,9 +302,30 @@ public class Catalogo extends javax.swing.JFrame {
                     .addComponent(BotonComandas)
                     .addComponent(BotonEstados)
                     .addComponent(BotonMunicipios))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 235, Short.MAX_VALUE)
-                .addComponent(BotonRegresoConsultas)
-                .addGap(26, 26, 26))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(BotonDetalleComanda)
+                            .addComponent(BotonDetalleProveedor)
+                            .addComponent(BotonDetalleTicket)
+                            .addComponent(BotonMesas)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(61, 61, 61)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BotonMeseroAtiendeMesa)
+                    .addComponent(BotonTipoProducto)
+                    .addComponent(BotonUsuarios))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(BotonRegresoConsultas)
+                        .addGap(26, 26, 26))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40))))
         );
 
         pack();
@@ -340,6 +461,28 @@ public class Catalogo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BotonMunicipiosMouseClicked
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        try {
+            // TODO add your handling code here:
+            OpcionElegida = jComboBox1.getSelectedItem().toString();
+            
+            
+            
+            elegir = 0;
+            
+            if(OpcionElegida.equals("Clientes")) elegir = 1;
+            if(OpcionElegida.equals("Empleados")) elegir = 2;
+            switch(elegir){
+                case 1: MostrarTabla(IdentificadorColumnaCliente,1);
+                break; 
+                case 2: MostrarTabla(IdentificadorColumnaEmpleado,3);
+                    break;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Catalogo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -371,7 +514,11 @@ public class Catalogo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Catalogo().setVisible(true);
+                try {
+                    new Catalogo().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Catalogo.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -379,15 +526,25 @@ public class Catalogo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonClientes;
     private javax.swing.JButton BotonComandas;
+    private javax.swing.JButton BotonDetalleComanda;
+    private javax.swing.JButton BotonDetalleProveedor;
+    private javax.swing.JButton BotonDetalleTicket;
     private javax.swing.JButton BotonEmpleados;
     private javax.swing.JButton BotonEstados;
     private javax.swing.JButton BotonFacturas;
     private javax.swing.JButton BotonHorarios;
+    private javax.swing.JButton BotonMesas;
+    private javax.swing.JButton BotonMeseroAtiendeMesa;
     private javax.swing.JButton BotonMunicipios;
     private javax.swing.JButton BotonProductos;
     private javax.swing.JButton BotonProveedores;
     private javax.swing.JButton BotonPuestos;
     private javax.swing.JButton BotonRegresoConsultas;
     private javax.swing.JButton BotonTickets;
+    private javax.swing.JButton BotonTipoProducto;
+    private javax.swing.JButton BotonUsuarios;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

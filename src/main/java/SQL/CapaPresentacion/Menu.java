@@ -177,10 +177,14 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void catalogoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_catalogoButtonMouseClicked
-        // TODO add your handling code here:
-        Catalogo catalogo = new Catalogo();
-        catalogo.setVisible(true);
-        dispose();
+        try {
+            // TODO add your handling code here:
+            Catalogo catalogo = new Catalogo();
+            catalogo.setVisible(true);
+            dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_catalogoButtonMouseClicked
 
     private void BotonRegresoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonRegresoMouseClicked

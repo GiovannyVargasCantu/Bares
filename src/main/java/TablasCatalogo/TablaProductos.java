@@ -29,7 +29,7 @@ public class TablaProductos extends javax.swing.JFrame {
         initComponents();
         
         bd = new Conexion();        
-String[] tableColumnsName = {"Producto ID","Nombre Producto","Disponible","Cantidad","Precio Unidad","Tipo Producto ID"}; 
+String[] tableColumnsName = {"Producto ID","Nombre Producto","Cantidad","Precio Unidad","Tipo Producto ID"}; 
 DefaultTableModel aModel = (DefaultTableModel) jTable1.getModel();
 aModel.setColumnIdentifiers(tableColumnsName);
 ResultSet rs =  bd.Catalogo(11);
@@ -108,10 +108,14 @@ jTable1.setModel(aModel);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonRegresarMouseClicked
-        // TODO add your handling code here:
-        Catalogo catalogo = new Catalogo();
-        catalogo.setVisible(true);
-        dispose();
+        try {
+            // TODO add your handling code here:
+            Catalogo catalogo = new Catalogo();
+            catalogo.setVisible(true);
+            dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(TablaProductos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BotonRegresarMouseClicked
 
     /**

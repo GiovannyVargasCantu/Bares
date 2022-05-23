@@ -29,7 +29,7 @@ public class TablaMunicipios extends javax.swing.JFrame {
         initComponents();
         
         bd = new Conexion();        
-String[] tableColumnsName = {"Municipio ID","Estado ID","Descripcion"}; 
+String[] tableColumnsName = {"Municipio ID","Descripcion","Estado ID"}; 
 DefaultTableModel aModel = (DefaultTableModel) jTable1.getModel();
 aModel.setColumnIdentifiers(tableColumnsName);
 ResultSet rs =  bd.Catalogo(10);
@@ -108,10 +108,14 @@ jTable1.setModel(aModel);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonRegresarMouseClicked
-        // TODO add your handling code here:
-        Catalogo catalogo = new Catalogo();
-        catalogo.setVisible(true);
-        dispose();
+        try {
+            // TODO add your handling code here:
+            Catalogo catalogo = new Catalogo();
+            catalogo.setVisible(true);
+            dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(TablaMunicipios.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BotonRegresarMouseClicked
 
     /**

@@ -25,7 +25,7 @@ package SQL;
     
 public class Conexion {
     public static Connection conexion = null;
-    public static String cadenaconexion = "jdbc:sqlserver://localhost:1433;databaseName=Bares13;encrypt=true;trustServerCertificate=true";
+    public static String cadenaconexion = "jdbc:sqlserver://localhost:1433;databaseName=Bares;encrypt=true;trustServerCertificate=true";
     public static boolean validacion = true;
     public Connection establecerConexion(){
          //System.out.println(usuario);
@@ -51,7 +51,7 @@ public class Conexion {
 
         try
         {
-           conexion = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Bares12;encrypt=true;trustServerCertificate=true","usersql","root2");
+           conexion = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Bares;encrypt=true;trustServerCertificate=true","usersql","root2");
         } catch (SQLException e)
         {
             e.printStackTrace();
@@ -103,7 +103,28 @@ public class Conexion {
                 Tabla = "Municipios";
             break;
             case 11:
-                Tabla = "Producto";
+                Tabla = "Productos";
+            break;
+            case 12:
+                Tabla = "DetalleComanda";
+            break;
+            case 13:
+                 Tabla = "DetalleProveedor"; //TODO
+            break;
+            case 14:
+                 Tabla = "DetalleTicket"; //TODO
+            break;
+            case 15: 
+                 Tabla = "Mesas"; //TODO
+            break;
+            case 16: 
+                 Tabla = "MeseroAtiendeMesa"; //TODO
+            break;
+            case 17:
+                 Tabla = "TipoProducto"; //TODO
+            break;
+            case 18: 
+                 Tabla = "Usuarios"; //TODO
             break;
             //Add some more!
         }
@@ -313,6 +334,59 @@ public class Conexion {
         try {
             Statement s = conexion.createStatement();
             String query = "SELECT * FROM " + TablaModificar + " WHERE " + IDBuscado + " = " + Buscado;
+            
+            rs = s.executeQuery(query);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet ObtenerID(int Tabla) {
+        String TablaBuscar = null;
+        String IDBuscado = null;
+        switch(Tabla) {
+            case 1:
+                TablaBuscar = "Cliente";
+                IDBuscado = "ClienteID";
+            break;
+            case 2:
+                TablaBuscar = "Proveedor";
+            break;
+            case 3:
+                TablaBuscar = "Empleado";
+            break;
+            case 4:
+                TablaBuscar = "Horario";
+            break;
+            case 5:
+                TablaBuscar = "Puesto";
+            break;
+            case 6:
+                TablaBuscar = "Factura";
+            break;
+            case 7:
+                TablaBuscar = "Ticket";
+            break;
+            case 8:
+                TablaBuscar = "Comanda";
+            break;
+            case 9:
+                TablaBuscar = "Estados";
+            break;
+            case 10:
+                TablaBuscar = "Municipios";
+            break;
+            case 11:
+                TablaBuscar = "Producto";
+            break;
+        }
+        
+        ResultSet rs = null;
+        try {
+            Statement s = conexion.createStatement();
+            String query = "SELECT MAX("+IDBuscado+") FROM " + TablaBuscar + "";
             
             rs = s.executeQuery(query);
             

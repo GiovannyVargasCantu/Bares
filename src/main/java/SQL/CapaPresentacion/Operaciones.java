@@ -4,7 +4,8 @@
  */
 package SQL.CapaPresentacion;
 
-import Alterar.AlterarMenu;
+import AgregarProductosComanda.GenerarComanda;
+import Alterar.AlterarClientes;
 import java.sql.SQLException;
 
 /**
@@ -38,6 +39,11 @@ public class Operaciones extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setText("Generar comanda");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jButton2.setText("Generar Ticket");
 
@@ -96,7 +102,7 @@ public class Operaciones extends javax.swing.JFrame {
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         // TODO add your handling code here:
         //Leave it to me!
-        AlterarMenu consulta = new AlterarMenu();
+        AlterarClientes consulta = new AlterarClientes();
         consulta.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton4MouseClicked
@@ -107,6 +113,13 @@ public class Operaciones extends javax.swing.JFrame {
         menu.setVisible(true);
         dispose();
     }//GEN-LAST:event_BotonRegresoConsultas1MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        GenerarComanda comanda = new GenerarComanda();
+        comanda.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments

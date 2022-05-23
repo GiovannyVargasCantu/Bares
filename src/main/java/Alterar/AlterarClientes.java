@@ -22,12 +22,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Giovanny Vargas
  */
-public class AlterarMenu extends javax.swing.JFrame {
+public class AlterarClientes extends javax.swing.JFrame {
 
     /**
      * Creates new form AlterarMenu
      */
-    public AlterarMenu() {
+    public AlterarClientes() {
         initComponents();
         InicializarOpciones();
     }
@@ -61,11 +61,33 @@ public class AlterarMenu extends javax.swing.JFrame {
         NumeroTelefonoContactoRadioEliminar.setEnabled(false);
     }
     private void InicializarAgregar(){
-        ClienteIDTexto.setEnabled(true);
+        
         NombreClienteTexto.setEnabled(true);
         ApellidosClienteTexto.setEnabled(true);
         TarjetaBancariaTexto.setEnabled(true);
         NumeroTelefonoContactoTexto.setEnabled(true);
+        String ClienteID = null;
+        int ClienteIntIDNuevo = 0;
+        String ClienteIDNuevo = null;
+        try {
+            // TODO add your handling code here:
+            ClienteIDTexto.setEnabled(false);
+            
+            bd = new Conexion();
+            ResultSet rs = bd.ObtenerID(1);
+            
+            rs.next();
+            ClienteID = rs.getString(1);
+            ClienteIntIDNuevo =  Integer.parseInt(ClienteID);
+            ClienteIDNuevo = String.valueOf(ClienteIntIDNuevo + 1);
+            ClienteIDTexto.setText(ClienteIDNuevo);
+            
+               
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AlterarClientes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     private void InicializarModificar(){
         IndiceClienteIDModificar.setEnabled(true);
@@ -138,49 +160,15 @@ public class AlterarMenu extends javax.swing.JFrame {
        TarjetaBancaria = TarjetaBancariaTexto.getText();
        NumeroTelefonoContacto = NumeroTelefonoContactoTexto.getText();
        
-       Query = "(" +ClienteID+ ",'"+NombreCliente+"','"+ApellidoCliente+"','"+TarjetaBancaria+"','"+NumeroTelefonoContacto+"');";
+       Query = "('"+NombreCliente+"','"+ApellidoCliente+"','"+TarjetaBancaria+"','"+NumeroTelefonoContacto+"');";
        bd = new Conexion();        
        bd.AgregarDatos(Query, 1);
        
        JOptionPane.showMessageDialog(null, "Cliente agregado con éxito.");
      }
-     //Este Metodo es WIP debido a que debemos hacer las validaciones por cada boton, es decir el usuario es capaz de modificar en teoria todos los atributos de la tabla, pero a su vez puede modificar
-     //solo unos cuantos, por lo que hay que modificar el query para cada forma posible
+
      private void ModificarCliente(){
-         /*
-         IndiceClienteID =IndiceClienteIDModficar.getText();
         
-         if(ClienteIDRadioModificar.isSelected()) ClienteID = ClienteIDModificar.getText();
-         if(NombreClienteRadioModificar.isSelected()) NombreCliente = NombreClienteModificar.getText();
-         if(ApellidosClienteRadioModificar.isSelected()) ApellidoCliente = ApellidoClienteModificar.getText();
-         if(TarjetaBancariaRadioModificar.isSelected()) TarjetaBancaria = TarjetaBancariaModificar.getText();
-         if(NumeroTelefonicoContactoRadioModificar.isSelected()) NumeroTelefonoContacto = NumeroTelefonoContactoModificar.getText();
-         
-        
-        if((ClienteIDRadioModificar.isSelected()))     
-         if((ClienteIDRadioModificar.isSelected())&&(NombreClienteRadioModificar.isSelected())&&(ApellidosClienteRadioModificar.isSelected())&&(TarjetaBancariaRadioModificar.isSelected())&&(NumeroTelefonicoContactoRadioModificar.isSelected())){
-             Query = "UPDATE Cliente SET ClienteID = "+ClienteID+",Nombre='"+NombreCliente+"',Apellido='"+ApellidoCliente+"',TarjetaBancaria = '"+TarjetaBancariaModificar+"',NumeroClienteContacto='"+NumeroTelefonoContactoModificar+"' WHERE ClienteID ="+IndiceClienteID+";";
-         }     
-         
-         else if((ClienteIDRadioModificar.isSelected())&&(NombreClienteRadioModificar.isSelected())&&(ApellidosClienteRadioModificar.isSelected())&&(TarjetaBancariaRadioModificar.isSelected())){
-             Query = "UPDATE Cliente SET ClienteID = "+ClienteID+",Nombre='"+NombreCliente+"',Apellido='"+ApellidoCliente+"',TarjetaBancaria = '"+TarjetaBancariaModificar+"' WHERE ClienteID ="+IndiceClienteID+";";
-         }
-             
-             
-         else if((ClienteIDRadioModificar.isSelected())&&(NombreClienteRadioModificar.isSelected())&&(ApellidosClienteRadioModificar.isSelected())){
-             Query = "UPDATE Cliente SET ClienteID = "+ClienteID+",Nombre='"+NombreCliente+"',Apellido='"+ApellidoCliente+"' WHERE ClienteID ="+IndiceClienteID+";";
-         
-         }
-         //Cliente ID 
-         else if((ClienteIDRadioModificar.isSelected())&&(NombreClienteRadioModificar.isSelected())){
-             Query = "UPDATE Cliente SET ClienteID = "+ClienteID+",Nombre='"+NombreCliente+"' WHERE ClienteID ="+IndiceClienteID+";";
-             
-         }
-         else if((ClienteIDRadioModificar.isSelected())){
-             Query = "UPDATE Cliente SET ClienteID = "+ClienteID+" WHERE ClienteID ="+IndiceClienteID+";";
-          
-         }
-         */
          String clienteID = IDModificacion.getText();
          String nombre = NombreClienteModificar.getText();
          String apellidos = ApellidoClienteModificar.getText();
@@ -740,7 +728,7 @@ public class AlterarMenu extends javax.swing.JFrame {
             
             
         } catch (SQLException ex) {
-            Logger.getLogger(AlterarMenu.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AlterarClientes.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_buscarButtonMouseClicked
 
@@ -772,20 +760,23 @@ public class AlterarMenu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AlterarMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlterarClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AlterarMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlterarClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AlterarMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlterarClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AlterarMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AlterarClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AlterarMenu().setVisible(true);
+                new AlterarClientes().setVisible(true);
             }
         });
     }
