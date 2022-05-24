@@ -5,6 +5,8 @@
 package SQL.CapaPresentacion;
 
 import AgregarProductosComanda.GenerarComanda;
+import AgregarProductosComanda.GenerarFactura;
+import AgregarProductosComanda.GenerarTicket;
 import Alterar.AlterarClientes;
 import java.sql.SQLException;
 
@@ -31,8 +33,8 @@ public class Operaciones extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        genticket = new javax.swing.JButton();
+        GenFact = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         BotonRegresoConsultas1 = new javax.swing.JButton();
 
@@ -45,9 +47,19 @@ public class Operaciones extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Generar Ticket");
+        genticket.setText("Generar Ticket");
+        genticket.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                genticketMouseClicked(evt);
+            }
+        });
 
-        jButton3.setText("Generar Factura");
+        GenFact.setText("Generar Factura");
+        GenFact.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                GenFactMouseClicked(evt);
+            }
+        });
 
         jButton4.setText("Alterar");
         jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -71,9 +83,9 @@ public class Operaciones extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addComponent(jButton1)
                 .addGap(77, 77, 77)
-                .addComponent(jButton2)
+                .addComponent(genticket)
                 .addGap(77, 77, 77)
-                .addComponent(jButton3)
+                .addComponent(GenFact)
                 .addGap(173, 173, 173)
                 .addComponent(jButton4)
                 .addContainerGap(173, Short.MAX_VALUE))
@@ -88,8 +100,8 @@ public class Operaciones extends javax.swing.JFrame {
                 .addGap(159, 159, 159)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
+                    .addComponent(genticket)
+                    .addComponent(GenFact)
                     .addComponent(jButton4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
                 .addComponent(BotonRegresoConsultas1)
@@ -120,6 +132,20 @@ public class Operaciones extends javax.swing.JFrame {
         comanda.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void genticketMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_genticketMouseClicked
+        // TODO add your handling code here:
+        GenerarTicket gent = new GenerarTicket();
+        dispose();
+        gent.setVisible(true);
+    }//GEN-LAST:event_genticketMouseClicked
+
+    private void GenFactMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GenFactMouseClicked
+        // TODO add your handling code here:
+        GenerarFactura genFac = new GenerarFactura();
+        dispose();
+        genFac.setVisible(true);
+    }//GEN-LAST:event_GenFactMouseClicked
 
     /**
      * @param args the command line arguments
@@ -158,9 +184,9 @@ public class Operaciones extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonRegresoConsultas1;
+    private javax.swing.JButton GenFact;
+    private javax.swing.JButton genticket;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     // End of variables declaration//GEN-END:variables
 }

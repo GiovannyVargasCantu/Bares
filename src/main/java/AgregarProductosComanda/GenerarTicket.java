@@ -4,6 +4,8 @@
  */
 package AgregarProductosComanda;
 
+import SQL.CapaPresentacion.Ingresar;
+import SQL.CapaPresentacion.Operaciones;
 import SQL.Conexion;
 import static SQL.Conexion.conexion;
 import java.sql.ResultSet;
@@ -11,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,17 +26,24 @@ public class GenerarTicket extends javax.swing.JFrame {
      */
     public GenerarTicket() {
         initComponents();
-        ComandaIDBox.removeAllItems();
+        ComandaID.removeAllItems();
+        MetodoPago.removeAllItems();
+        MetodoPago.addItem("Efectivo");
+        MetodoPago.addItem("Tarjeta");
+        
         Conexion bd = new Conexion();
         ResultSet rs;
         Statement s;
+        
         try {
             s = conexion.createStatement();
             String query = "select * from Comanda where exists (select * from DetalleComanda where DetalleComanda.ComandaID = Comanda.ComandaID) and Not exists (Select * from Ticket where Ticket.ComandaID = Comanda.ComandaID)";
             rs = s.executeQuery(query);
+            
             while (rs.next()) {
-                ComandaIDBox.addItem(rs.getString("ComandaID"));
+                ComandaID.addItem(rs.getString("ComandaID"));
             }
+            
         } catch (SQLException ex) {
             Logger.getLogger(GenerarTicket.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -50,67 +60,82 @@ public class GenerarTicket extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
-        ComandaIDBox = new javax.swing.JComboBox<>();
+        ComandaID = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        RealizarTicket = new javax.swing.JButton();
+        MetodoPago = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
+        Regresar = new javax.swing.JButton();
 
         jLabel4.setText("jLabel4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        ComandaIDBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComandaID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel1.setText("RealizarTicket");
 
         jLabel2.setText("ComandaID");
 
-        jButton1.setText("Realizar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        RealizarTicket.setText("Realizar");
+        RealizarTicket.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RealizarTicketMouseClicked(evt);
+            }
+        });
+        RealizarTicket.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                RealizarTicketActionPerformed(evt);
             }
         });
 
-        jTextField1.setText("jTextField1");
-
-        jLabel3.setText("Descripcion");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        MetodoPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        MetodoPago.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                MetodoPagoItemStateChanged(evt);
+            }
+        });
 
         jLabel5.setText("Metodo Pago");
+
+        Regresar.setText("Regresar");
+        Regresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RegresarMouseClicked(evt);
+            }
+        });
+        Regresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(85, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(115, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(152, 152, 152))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(10, 10, 10)))
+                            .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ComandaIDBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(1, 1, 1)))
-                .addGap(152, 152, 152))
+                            .addComponent(MetodoPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComandaID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(123, 123, 123))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(RealizarTicket)
+                        .addGap(158, 158, 158))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(Regresar)
+                        .addGap(26, 26, 26))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,27 +144,128 @@ public class GenerarTicket extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ComandaIDBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ComandaID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(MetodoPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(49, 49, 49)
-                .addComponent(jButton1)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addComponent(RealizarTicket)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addComponent(Regresar)
+                .addGap(29, 29, 29))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void RealizarTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RealizarTicketActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_RealizarTicketActionPerformed
+
+    private void RealizarTicketMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RealizarTicketMouseClicked
+        // TODO add your handling code here:
+        String ticketID;
+        String fecha;
+        String metodoPago = (String) MetodoPago.getSelectedItem();
+        String comandaID = (String) ComandaID.getSelectedItem();
+        int empleadoID=0;
+        float pagoTotal;
+        
+        Conexion bd = new Conexion();
+        ResultSet rs;
+        Statement s;
+        System.out.println(metodoPago);
+        System.out.println(comandaID);
+        fecha = Ingresar.devolverFecha();
+        System.out.println(fecha);
+        //////////////////////////
+        
+        //////////////////////////
+        try {
+            s = conexion.createStatement();
+            //////////////////////////////////
+            /*
+            String query2 = "SELECT decom.ComandaID, decom.Linea, decom.ProductoID , decom.Cantidad, SUM(decom.Cantidad*pr.PrecioUnidad) TotalLinea FROM Productos pr, DetalleComanda decom \n" +
+"WHERE decom.ProductoID=pr.ProductoID AND ComandaID = "+comandaID+"\n" +
+"GROUP BY decom.ComandaID, decom.Linea, decom.ProductoID, decom.Cantidad ";
+            
+            ResultSet r; //rs
+            Statement ser;//s
+            ser = conexion.createStatement();
+            r = ser.executeQuery(query2);
+            
+            
+            System.out.println("funciono");
+            while(r.next()){
+                int a = s.executeUpdate("INSERT INTO DetalleTicket\n" +
+                "VALUES ("+comandaID+","+comandaID+","+r.getInt("Linea")+","+r.getInt("ProductoID")+","+r.getInt("Cantidad")+","+r.getInt("TotalLinea")+")");
+                System.out.println("aaa");
+            }
+            /////////////////////////////////*/
+            String query = "select * from Comanda where ComandaID = "+comandaID;
+            rs = s.executeQuery(query);
+            while(rs.next()){
+                empleadoID = rs.getInt("MeseroID");
+                System.out.println(empleadoID);
+            }
+            query = "SELECT dcom.ComandaID, SUM(dcom.Cantidad*pr.PrecioUnidad) Total FROM DetalleComanda dcom, Productos pr\n" +
+            "WHERE dcom.ProductoID=pr.ProductoID AND ComandaID = "+comandaID+"\n" +
+            "GROUP BY dcom.ComandaID";
+            rs = s.executeQuery(query);
+            rs.next();
+            pagoTotal = rs.getFloat("Total");
+            System.out.println(pagoTotal);
+            //error tal vez quitar ticketID
+            query = "INSERT INTO Ticket\n" + "VALUES ("+pagoTotal+",'"+fecha+"','"+metodoPago+"',"+comandaID+","+empleadoID+")";
+            int a = s.executeUpdate(query);
+            System.out.println("Todobienn");
+            String query2 = "SELECT decom.ComandaID, decom.Linea, decom.ProductoID , decom.Cantidad, SUM(decom.Cantidad*pr.PrecioUnidad) TotalLinea FROM Productos pr, DetalleComanda decom \n" +
+"WHERE decom.ProductoID=pr.ProductoID AND ComandaID = "+comandaID+"\n" +
+"GROUP BY decom.ComandaID, decom.Linea, decom.ProductoID, decom.Cantidad ";
+            rs = s.executeQuery("select Top(1) max(TicketID) as Maximo from Ticket ");
+            rs.next();
+            ticketID = rs.getString("Maximo");
+            ResultSet r; //rs
+            Statement ser;//s
+            ser = conexion.createStatement();
+            r = s.executeQuery(query2);
+            
+            query = "INSERT INTO DetalleTicket\n" +
+                "VALUES ("+comandaID+","+comandaID+","+comandaID+",cantidad,precio)";
+            
+            
+            while(r.next()){
+                a = ser.executeUpdate("INSERT INTO DetalleTicket\n" +
+                "VALUES ("+ticketID+","+comandaID+","+r.getInt("Linea")+","+r.getInt("ProductoID")+","+r.getInt("Cantidad")+","+r.getInt("TotalLinea")+")");
+                System.out.println("aaa");
+            }
+            JOptionPane.showMessageDialog(null, "Ticket Generado exitosamente!");
+            GenerarTicket gen = new GenerarTicket();
+            gen.setVisible(true);
+            dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(GenerarTicket.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Ocurrió algún error");
+        }
+    }//GEN-LAST:event_RealizarTicketMouseClicked
+
+    private void MetodoPagoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_MetodoPagoItemStateChanged
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_MetodoPagoItemStateChanged
+
+    private void RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RegresarActionPerformed
+
+    private void RegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegresarMouseClicked
+        // TODO add your handling code here:
+        Operaciones op = new Operaciones();
+        op.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_RegresarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -177,14 +303,13 @@ public class GenerarTicket extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> ComandaIDBox;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> ComandaID;
+    private javax.swing.JComboBox<String> MetodoPago;
+    private javax.swing.JButton RealizarTicket;
+    private javax.swing.JButton Regresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

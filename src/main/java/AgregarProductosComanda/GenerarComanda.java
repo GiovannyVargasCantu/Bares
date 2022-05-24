@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -136,6 +137,7 @@ public class GenerarComanda extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Agregar Comanda");
 
         MesaID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -187,9 +189,6 @@ public class GenerarComanda extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(348, 348, 348)
-                        .addComponent(jLabel6))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(240, 240, 240)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel8)
@@ -205,7 +204,10 @@ public class GenerarComanda extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(CajeroID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(88, 88, 88)
-                                .addComponent(AgregarComanda)))))
+                                .addComponent(AgregarComanda))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(361, 361, 361)
+                        .addComponent(jLabel6)))
                 .addContainerGap(357, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -235,7 +237,8 @@ public class GenerarComanda extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel3.setText("Insertar Productos");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setText("Insertar Productos a comanda");
 
         jLabel4.setText("ComandaID");
 
@@ -281,6 +284,7 @@ public class GenerarComanda extends javax.swing.JFrame {
             }
         });
 
+        Cantidad.setModel(new javax.swing.SpinnerNumberModel(1, 1, 20, 1));
         Cantidad.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 CantidadStateChanged(evt);
@@ -294,6 +298,12 @@ public class GenerarComanda extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(381, 381, 381)
+                        .addComponent(AgregarProducto))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(358, 358, 358)
+                        .addComponent(ProductoEncontrado))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
@@ -301,24 +311,18 @@ public class GenerarComanda extends javax.swing.JFrame {
                         .addGap(22, 22, 22)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TipoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(ProductoID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(381, 381, 381)
-                        .addComponent(AgregarProducto))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(358, 358, 358)
-                        .addComponent(ProductoEncontrado))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(369, 369, 369)
-                        .addComponent(jLabel3)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(TipoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(ProductoID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(129, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -420,7 +424,9 @@ public class GenerarComanda extends javax.swing.JFrame {
                 GenerarComanda Gen = new GenerarComanda();
                 Gen.setVisible(true);
                 dispose();
+                JOptionPane.showMessageDialog(null, "Comanda generada exitosamente");
             } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Ocurrió algún error");
                 Logger.getLogger(GenerarComanda.class.getName()).log(Level.SEVERE, null, ex);
             }
             
@@ -517,6 +523,7 @@ public class GenerarComanda extends javax.swing.JFrame {
             contador++;
             int elementosInsertados = s.executeUpdate(query2);
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Ocurrió algún error");
             System.out.println(ex);
             ProductoEncontrado.setText("Error");
             ProductoEncontrado.setForeground(Color.red);
