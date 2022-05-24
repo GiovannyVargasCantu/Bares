@@ -18,6 +18,8 @@ package SQL;
     import java.sql.SQLException;
     import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
     import javax.swing.JOptionPane;
 
 //import javax.swing.JTable;
@@ -198,6 +200,27 @@ public class Conexion {
             case 11:
                 TablaModificar = "Producto";
             break;
+            case 12:
+                TablaModificar = "DetalleComanda";
+            break;
+            case 13:
+                 TablaModificar = "DetalleProveedor"; //TODO
+            break;
+            case 14:
+                 TablaModificar = "DetalleTicket"; //TODO
+            break;
+            case 15: 
+                 TablaModificar = "Mesas"; //TODO
+            break;
+            case 16: 
+                 TablaModificar = "MeseroAtiendeMesa"; //TODO
+            break;
+            case 17:
+                 TablaModificar = "TipoProducto"; //TODO
+            break;
+            case 18: 
+                 TablaModificar = "Usuarios"; //TODO
+            break;
         }
         
         ResultSet rs = null;
@@ -253,6 +276,27 @@ public class Conexion {
             break;
             case 11:
                 TablaModificar = "Producto";
+            break;
+            case 12:
+                TablaModificar = "DetalleComanda";
+            break;
+            case 13:
+                 TablaModificar = "DetalleProveedor"; //TODO
+            break;
+            case 14:
+                 TablaModificar = "DetalleTicket"; //TODO
+            break;
+            case 15: 
+                 TablaModificar = "Mesas"; //TODO
+            break;
+            case 16: 
+                 TablaModificar = "MeseroAtiendeMesa"; //TODO
+            break;
+            case 17:
+                 TablaModificar = "TipoProducto"; //TODO
+            break;
+            case 18: 
+                 TablaModificar = "Usuarios"; //TODO
             break;
             //Add more cases for the other tables!
         }
@@ -329,6 +373,27 @@ public class Conexion {
             case 11:
                 TablaModificar = "Producto";
             break;
+            case 12:
+                TablaModificar = "DetalleComanda";
+            break;
+            case 13:
+                 TablaModificar = "DetalleProveedor"; //TODO
+            break;
+            case 14:
+                 TablaModificar = "DetalleTicket"; //TODO
+            break;
+            case 15: 
+                 TablaModificar = "Mesas"; //TODO
+            break;
+            case 16: 
+                 TablaModificar = "MeseroAtiendeMesa"; //TODO
+            break;
+            case 17:
+                 TablaModificar = "TipoProducto"; //TODO
+            break;
+            case 18: 
+                 TablaModificar = "Usuarios"; //TODO
+            break;
         }
         
         ResultSet rs = null;
@@ -356,24 +421,30 @@ public class Conexion {
             break;
             case 2:
                 TablaBuscar = "Proveedor";
+                elegir = 1;
             break;
             case 3:
                 TablaBuscar = "Empleado";
+                elegir = 1;
             break;
             case 4:
                 TablaBuscar = "Horario";
             break;
             case 5:
                 TablaBuscar = "Puesto";
+                elegir = 1;
             break;
             case 6:
                 TablaBuscar = "Factura";
+                elegir = 1;
             break;
             case 7:
                 TablaBuscar = "Ticket";
+                elegir = 1;
             break;
             case 8:
                 TablaBuscar = "Comanda";
+                elegir = 1;
             break;
             case 9:
                 TablaBuscar = "Estados";
@@ -382,7 +453,32 @@ public class Conexion {
                 TablaBuscar = "Municipios";
             break;
             case 11:
-                TablaBuscar = "Producto";
+                TablaBuscar = "Productos";
+                elegir = 1;
+            break;
+            case 12:
+                TablaBuscar = "DetalleComanda";
+            break;
+            case 13:
+                 TablaBuscar = "DetalleProveedor"; //TODO
+            break;
+            case 14:
+                 TablaBuscar = "DetalleTicket"; //TODO
+            break;
+            case 15: 
+                 TablaBuscar = "Mesas"; //TODO
+                 elegir = 1;
+            break;
+            case 16: 
+                 TablaBuscar = "MeseroAtiendeMesa"; //TODO
+            break;
+            case 17:
+                 TablaBuscar = "TipoProducto"; //TODO
+                 elegir = 1;
+            break;
+            case 18: 
+                 TablaBuscar = "Usuarios"; //TODO
+                 elegir = 1;
             break;
         }
         
@@ -505,6 +601,22 @@ public class Conexion {
             e.printStackTrace();
         }
         return tablas;
+    }
+
+    public int ObtenerPuestoID() {
+        int puesto = 0;
+        ResultSet rs = null;
+        try {
+            Statement s = conexion.createStatement(); 
+            String query = "Select PuestoID from Usuarios where NombreUsuario = '"+Ingresar.usuario+"'";
+            rs = s.executeQuery(query);
+            rs.next();
+            puesto = rs.getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return puesto;
+        
     }
    
 }

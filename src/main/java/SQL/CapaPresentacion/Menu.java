@@ -23,8 +23,27 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
+        AsignarNombreUsuario();
+        ValidacionPuesto();
     }
-    
+    private Conexion bd;
+    int puesto=0;
+     private void AsignarNombreUsuario() {
+        NombreUsuario.setText(Ingresar.usuario);
+    }
+     private void ValidacionPuesto(){
+         bd = new Conexion();
+         puesto = bd.ObtenerPuestoID();
+         switch(puesto){
+             case 1: break;
+             case 2: break;
+             case 3: consultaButton.setEnabled(false);
+                     catalogoButton.setEnabled(false);
+                     break;
+             case 4: catalogoButton.setEnabled(false);
+                     break;
+         }
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,6 +62,8 @@ public class Menu extends javax.swing.JFrame {
         catalogoButton = new javax.swing.JButton();
         operacionButton = new javax.swing.JButton();
         consultaButton = new javax.swing.JButton();
+        TextoBienvenida = new javax.swing.JLabel();
+        NombreUsuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -151,6 +172,15 @@ public class Menu extends javax.swing.JFrame {
         );
 
         bg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 490));
+
+        TextoBienvenida.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        TextoBienvenida.setText("Bienvenido");
+        bg.add(TextoBienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 180, 50));
+
+        NombreUsuario.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        NombreUsuario.setForeground(new java.awt.Color(0, 204, 0));
+        NombreUsuario.setText("jLabel3");
+        bg.add(NombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, 90, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -263,6 +293,8 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonRegreso;
+    private javax.swing.JLabel NombreUsuario;
+    private javax.swing.JLabel TextoBienvenida;
     private javax.swing.JPanel bg;
     private javax.swing.JButton catalogoButton;
     private javax.swing.JButton consultaButton;
@@ -272,4 +304,5 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton operacionButton;
     // End of variables declaration//GEN-END:variables
+
 }

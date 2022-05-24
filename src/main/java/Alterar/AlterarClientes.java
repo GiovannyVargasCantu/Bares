@@ -42,16 +42,10 @@ public class AlterarClientes extends javax.swing.JFrame {
         //Modificar
         IndiceClienteIDModificar.setEnabled(false);
         buscarButton.setEnabled(false);
-        //ClienteIDModificar.setEnabled(false);
         NombreClienteModificar.setEnabled(false);
         ApellidoClienteModificar.setEnabled(false);
         TarjetaBancariaModificar.setEnabled(false);
         NumeroTelefonoContactoModificar.setEnabled(false);
-        /*ClienteIDRadioModificar.setEnabled(false);
-        NombreClienteRadioModificar.setEnabled(false);
-        ApellidosClienteRadioModificar.setEnabled(false);
-        TarjetaBancariaRadioModificar.setEnabled(false);
-        NumeroTelefonicoContactoRadioModificar.setEnabled(false);*/
         //Eliminar
         ClienteIDEliminar.setEnabled(false);
         TarjetaBancariaEliminar.setEnabled(false);
@@ -159,7 +153,7 @@ public class AlterarClientes extends javax.swing.JFrame {
        ApellidoCliente = ApellidosClienteTexto.getText();
        TarjetaBancaria = TarjetaBancariaTexto.getText();
        NumeroTelefonoContacto = NumeroTelefonoContactoTexto.getText();
-       
+       //INSERT INTO BALBLABA VALUES ()
        Query = "('"+NombreCliente+"','"+ApellidoCliente+"','"+TarjetaBancaria+"','"+NumeroTelefonoContacto+"');";
        bd = new Conexion();        
        bd.AgregarDatos(Query, 1);

@@ -157,24 +157,24 @@ jTable1.setModel(aModel);
            
             elegir = 0;
             
-            if(OpcionElegida.equals("Cliente")) elegir = 1;
-            if(OpcionElegida.equals("Proveedor")) elegir = 2;
-            if(OpcionElegida.equals("Empleado")) elegir = 3;
-            if(OpcionElegida.equals("Horario")) elegir = 4;
-            if(OpcionElegida.equals("Puesto")) elegir = 5;
-            if(OpcionElegida.equals("Factura")) elegir = 6;
-            if(OpcionElegida.equals("Ticket")) elegir = 7;
-            if(OpcionElegida.equals("Comanda")) elegir = 8;
-            if(OpcionElegida.equals("Estados")) elegir = 9;
-            if(OpcionElegida.equals("Municipios")) elegir = 10;
-            if(OpcionElegida.equals("Productos")) elegir = 11;
-            if(OpcionElegida.equals("DetalleComanda")) elegir = 12;
-            if(OpcionElegida.equals("DetalleProveedor")) elegir = 13;
-            if(OpcionElegida.equals("DetalleTicket")) elegir = 14;
-            if(OpcionElegida.equals("Mesas")) elegir = 15;
-            if(OpcionElegida.equals("MeseroAtiendeMesa")) elegir = 16;
-            if(OpcionElegida.equals("TipoProducto")) elegir = 17;
-            if(OpcionElegida.equals("Usuarios")) elegir = 18;
+            if(OpcionElegida.equals("Cliente")) elegir = 1; //Ya hecha
+            if(OpcionElegida.equals("Proveedor")) elegir = 2;//Saul
+            if(OpcionElegida.equals("Empleado")) elegir = 3;//Gio
+            if(OpcionElegida.equals("Horario")) elegir = 4;//Aldo
+            if(OpcionElegida.equals("Puesto")) elegir = 5;//Saul
+            if(OpcionElegida.equals("Factura")) elegir = 6;//No
+            if(OpcionElegida.equals("Ticket")) elegir = 7;//No
+            if(OpcionElegida.equals("Comanda")) elegir = 8;//No
+            if(OpcionElegida.equals("Estados")) elegir = 9;//No
+            if(OpcionElegida.equals("Municipios")) elegir = 10;//No
+            if(OpcionElegida.equals("Productos")) elegir = 11;//Gio
+            if(OpcionElegida.equals("DetalleComanda")) elegir = 12;//No
+            if(OpcionElegida.equals("DetalleProveedor")) elegir = 13;//Saul
+            if(OpcionElegida.equals("DetalleTicket")) elegir = 14;//No
+            if(OpcionElegida.equals("Mesas")) elegir = 15;//Alex
+            if(OpcionElegida.equals("MeseroAtiendeMesa")) elegir = 16;//Alex
+            if(OpcionElegida.equals("TipoProducto")) elegir = 17;//aldo
+            if(OpcionElegida.equals("Usuarios")) elegir = 18;//Gio
             //IdentificadorColumnas = ObtenerColumnas(elegir);
             switch(elegir){
             case 1: MostrarTabla(1);
