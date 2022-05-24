@@ -26,7 +26,7 @@ import java.util.ArrayList;
     
 public class Conexion {
     public static Connection conexion = null;
-    public static String cadenaconexion = "jdbc:sqlserver://localhost:1222;databaseName=Bares;encrypt=true;trustServerCertificate=true";
+    public static String cadenaconexion = "jdbc:sqlserver://localhost:1433;databaseName=Bares;encrypt=true;trustServerCertificate=true";
     public static boolean validacion = true;
     public Connection establecerConexion(){
          //System.out.println(usuario);
@@ -347,10 +347,12 @@ public class Conexion {
     public ResultSet ObtenerID(int Tabla) {
         String TablaBuscar = null;
         String IDBuscado = null;
+        String query = null;
+        int elegir = 0; //Esto es para los autoincrementos cambia el query.
         switch(Tabla) {
             case 1:
                 TablaBuscar = "Cliente";
-                IDBuscado = "ClienteID";
+                elegir = 1;
             break;
             case 2:
                 TablaBuscar = "Proveedor";
@@ -387,8 +389,12 @@ public class Conexion {
         ResultSet rs = null;
         try {
             Statement s = conexion.createStatement();
-            String query = "SELECT MAX("+IDBuscado+") FROM " + TablaBuscar + "";
-            
+            if(elegir == 1){
+            query = "select IDENT_CURRENT( '"+TablaBuscar+"' )";
+            }
+            else{
+                query = "SELECT MAX("+IDBuscado+") FROM " + TablaBuscar + "";
+            }
             rs = s.executeQuery(query);
             
         } catch (Exception e) {

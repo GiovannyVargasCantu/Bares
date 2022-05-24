@@ -58,7 +58,7 @@ while(rs.next()){
 jTable1.setModel(aModel);
  }
 
-    private String[] ObtenerTablas() {
+    public String[] ObtenerTablas() {
         bd = new Conexion();
         return bd.ObtenerNombreTablas();
     }

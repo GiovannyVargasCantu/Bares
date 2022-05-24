@@ -738,8 +738,8 @@ public class AlterarClientes extends javax.swing.JFrame {
 
     private void regresarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_regresarButtonMouseClicked
         // TODO add your handling code here:
-        Operaciones operaciones = new Operaciones();
-        operaciones.setVisible(true);
+        AlterarMenu Menu = new AlterarMenu();
+        Menu.setVisible(true);
         dispose();
     }//GEN-LAST:event_regresarButtonMouseClicked
 

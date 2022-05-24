@@ -54,6 +54,7 @@ public final class Ingresar extends javax.swing.JFrame {
         SimpleDateFormat sfecha = new SimpleDateFormat("yyyy/MM/dd");
         return sfecha.format(new Date());
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
