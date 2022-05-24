@@ -470,6 +470,10 @@ public class GenerarFactura extends javax.swing.JFrame {
         Conexion bd = new Conexion();
         ResultSet rs;
         Statement s;
+        if(Resultado.getSelectedItem()==null || (correoJt.getText().length()==0 || RFCJt.getText().length()!=13)){
+                JOptionPane.showMessageDialog(null, "Rellene todos los campos");
+                return;
+            }
         try {
             s = conexion.createStatement();
             String query = "INSERT INTO Factura\n" +

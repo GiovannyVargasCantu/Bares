@@ -43,7 +43,10 @@ public class GenerarTicket extends javax.swing.JFrame {
             while (rs.next()) {
                 ComandaID.addItem(rs.getString("ComandaID"));
             }
-            
+            if(ComandaID.getSelectedItem()==null){
+                RealizarTicket.setEnabled(false);
+                
+            }
         } catch (SQLException ex) {
             Logger.getLogger(GenerarTicket.class.getName()).log(Level.SEVERE, null, ex);
         }
