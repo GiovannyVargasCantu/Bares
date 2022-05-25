@@ -4,19 +4,13 @@
  */
 package Alterar;
 
-import SQL.CapaPresentacion.Operaciones;
 import SQL.Conexion;
-import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.AbstractButton;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
-import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -40,7 +34,7 @@ public class AlterarClientes extends javax.swing.JFrame {
         TarjetaBancariaTexto.setEnabled(false);
         NumeroTelefonoContactoTexto.setEnabled(false);
         //Modificar
-        IndiceClienteIDModificar.setEnabled(false);
+        ClienteIDModificar.setEnabled(false);
         buscarButton.setEnabled(false);
         NombreClienteModificar.setEnabled(false);
         ApellidoClienteModificar.setEnabled(false);
@@ -84,14 +78,7 @@ public class AlterarClientes extends javax.swing.JFrame {
         }
     }
     private void InicializarModificar(){
-        IndiceClienteIDModificar.setEnabled(true);
-        //ClienteIDModificar.setEnabled(true);
-        
-        /*ClienteIDRadioModificar.setEnabled(true);
-        NombreClienteRadioModificar.setEnabled(true);
-        ApellidosClienteRadioModificar.setEnabled(true);
-        TarjetaBancariaRadioModificar.setEnabled(true);
-        NumeroTelefonicoContactoRadioModificar.setEnabled(true);*/
+        ClienteIDModificar.setEnabled(true);
         buscarButton.setEnabled(true);
         
     }
@@ -111,17 +98,11 @@ public class AlterarClientes extends javax.swing.JFrame {
         NumeroTelefonoContactoTexto.setEnabled(false);
     }
     private void OcultarModificar() {
-        IndiceClienteIDModificar.setEnabled(false);
-        /*ClienteIDModificar.setEnabled(false);*/
+        ClienteIDModificar.setEnabled(false);
         NombreClienteModificar.setEnabled(false);
         ApellidoClienteModificar.setEnabled(false);
         TarjetaBancariaModificar.setEnabled(false);
         NumeroTelefonoContactoModificar.setEnabled(false);
-        /*ClienteIDRadioModificar.setEnabled(false);
-        NombreClienteRadioModificar.setEnabled(false);
-        ApellidosClienteRadioModificar.setEnabled(false);
-        TarjetaBancariaRadioModificar.setEnabled(false);
-        NumeroTelefonicoContactoRadioModificar.setEnabled(false);*/
         buscarButton.setEnabled(false);
     }
      private void OcultarEliminar() {
@@ -137,7 +118,7 @@ public class AlterarClientes extends javax.swing.JFrame {
     String OpcionElegida;
     int elegir;
     int bandera;
-    String IndiceClienteID;
+    String[] ClientesID = ObtenerIDS();
     String ClienteID ;
     String NombreCliente; 
     String ApellidoCliente;
@@ -162,7 +143,7 @@ public class AlterarClientes extends javax.swing.JFrame {
      }
 
      private void ModificarCliente(){
-        
+         
          String clienteID = IDModificacion.getText();
          String nombre = NombreClienteModificar.getText();
          String apellidos = ApellidoClienteModificar.getText();
@@ -203,6 +184,10 @@ public class AlterarClientes extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, "Cliente eliminado con éxito.");
     }
+       private String[] ObtenerIDS() {
+        bd = new Conexion();
+        return bd.ObtenerIDs(1);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -238,7 +223,6 @@ public class AlterarClientes extends javax.swing.JFrame {
         ApellidoClienteModificar = new javax.swing.JTextField();
         TarjetaBancariaModificar = new javax.swing.JTextField();
         NumeroTelefonoContactoModificar = new javax.swing.JTextField();
-        IndiceClienteIDModificar = new javax.swing.JTextField();
         buscarButton = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -246,6 +230,7 @@ public class AlterarClientes extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         IDModificacion = new javax.swing.JTextField();
+        ClienteIDModificar = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         ClienteIDEliminar = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -372,7 +357,7 @@ public class AlterarClientes extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NumeroTelefonoContactoTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(10, 10, 10, 10, new java.awt.Color(0, 0, 0)));
@@ -407,6 +392,8 @@ public class AlterarClientes extends javax.swing.JFrame {
         IDModificacion.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         IDModificacion.setText("0");
 
+        ClienteIDModificar.setModel(new javax.swing.DefaultComboBoxModel<>(ClientesID));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -432,7 +419,8 @@ public class AlterarClientes extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(buscarButton)
-                            .addComponent(IndiceClienteIDModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(ClienteIDModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -453,7 +441,7 @@ public class AlterarClientes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(IndiceClienteIDModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ClienteIDModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buscarButton)
@@ -475,7 +463,7 @@ public class AlterarClientes extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NumeroTelefonoContactoModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createMatteBorder(10, 10, 10, 10, new java.awt.Color(0, 0, 0)));
@@ -629,12 +617,25 @@ public class AlterarClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
         switch(elegir){
             case 1: AgregarCliente();
+                    NombreClienteTexto.setText(null);
+                    ApellidosClienteTexto.setText(null);
+                    TarjetaBancariaTexto.setText(null);
+                    NumeroTelefonoContactoTexto.setText(null);
                     break;
             case 2: ModificarCliente();
+                    NombreClienteModificar.setText(null);
+                    ApellidoClienteModificar.setText(null);
+                    TarjetaBancariaModificar.setText(null);
+                    NumeroTelefonoContactoModificar.setText(null);
                     break;
             case 3: EliminarCliente();
+                    ClienteIDEliminar.setText(null);
+                    TarjetaBancariaEliminar.setText(null);
+                    NumeroTelefonoContactoEliminar.setText(null);
                     break;
         }
+        String [] NuevosClientesID = ObtenerIDS();
+        ClienteIDModificar.setModel(new javax.swing.DefaultComboBoxModel<>(NuevosClientesID));
         
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -693,10 +694,7 @@ public class AlterarClientes extends javax.swing.JFrame {
 
     private void buscarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_buscarButtonActionPerformed
-
-    private void buscarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarButtonMouseClicked
-        try {
+         try {
             // TODO add your handling code here:
             NombreClienteModificar.setEnabled(false);
             ApellidoClienteModificar.setEnabled(false);
@@ -704,7 +702,7 @@ public class AlterarClientes extends javax.swing.JFrame {
             NumeroTelefonoContactoModificar.setEnabled(false);
             
             bd = new Conexion();
-            String idBuscado = IndiceClienteIDModificar.getText();
+            String idBuscado = ClienteIDModificar.getSelectedItem().toString();
             ResultSet rs = bd.ObtenerDatos(1, idBuscado);
             
             rs.next();
@@ -724,6 +722,10 @@ public class AlterarClientes extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(AlterarClientes.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }//GEN-LAST:event_buscarButtonActionPerformed
+
+    private void buscarButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarButtonMouseClicked
+     
     }//GEN-LAST:event_buscarButtonMouseClicked
 
     private void regresarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarButtonActionPerformed
@@ -779,10 +781,10 @@ public class AlterarClientes extends javax.swing.JFrame {
     private javax.swing.JTextField ApellidoClienteModificar;
     private javax.swing.JTextField ApellidosClienteTexto;
     private javax.swing.JTextField ClienteIDEliminar;
+    private javax.swing.JComboBox<String> ClienteIDModificar;
     private javax.swing.JRadioButton ClienteIDRadioEliminar;
     private javax.swing.JTextField ClienteIDTexto;
     private javax.swing.JTextField IDModificacion;
-    private javax.swing.JTextField IndiceClienteIDModificar;
     private javax.swing.JTextField NombreClienteModificar;
     private javax.swing.JTextField NombreClienteTexto;
     private javax.swing.JTextField NumeroTelefonoContactoEliminar;
@@ -819,10 +821,6 @@ public class AlterarClientes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton regresarButton;
     // End of variables declaration//GEN-END:variables
-
-  
-
-   
 
    
 }

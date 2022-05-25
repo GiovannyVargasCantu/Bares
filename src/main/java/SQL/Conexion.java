@@ -198,7 +198,7 @@ public class Conexion {
                 TablaModificar = "Municipios";
             break;
             case 11:
-                TablaModificar = "Producto";
+                TablaModificar = "Productos";
             break;
             case 12:
                 TablaModificar = "DetalleComanda";
@@ -275,7 +275,7 @@ public class Conexion {
                 TablaModificar = "Municipios";
             break;
             case 11:
-                TablaModificar = "Producto";
+                TablaModificar = "Productos";
             break;
             case 12:
                 TablaModificar = "DetalleComanda";
@@ -338,6 +338,7 @@ public class Conexion {
     public ResultSet ObtenerDatos(int Tabla, String Buscado) {
         String TablaModificar = null;
         String IDBuscado = null;
+        int comillasNecesitadas = 0;
         switch(Tabla) {
             case 1:
                 TablaModificar = "Cliente";
@@ -345,36 +346,47 @@ public class Conexion {
             break;
             case 2:
                 TablaModificar = "Proveedor";
+                IDBuscado = "ProveedorID";
             break;
             case 3:
                 TablaModificar = "Empleado";
+                IDBuscado = "EmpleadoID";
             break;
             case 4:
                 TablaModificar = "Horario";
+                IDBuscado = "HorarioID";
+                comillasNecesitadas = 1;
             break;
             case 5:
                 TablaModificar = "Puesto";
+                IDBuscado = "PuestoID";
             break;
             case 6:
                 TablaModificar = "Factura";
+                IDBuscado = "FacturaID";
             break;
             case 7:
                 TablaModificar = "Ticket";
+                IDBuscado = "TicketID";
             break;
             case 8:
                 TablaModificar = "Comanda";
+                IDBuscado = "ComandaID";
             break;
             case 9:
                 TablaModificar = "Estados";
+                IDBuscado = "EstadosID";
             break;
             case 10:
                 TablaModificar = "Municipios";
+                IDBuscado = "MunicipiosID";
             break;
             case 11:
-                TablaModificar = "Producto";
+                TablaModificar = "Productos";
+                IDBuscado = "ProductoID";
             break;
             case 12:
-                TablaModificar = "DetalleComanda";
+                TablaModificar = "DetalleComanda"; 
             break;
             case 13:
                  TablaModificar = "DetalleProveedor"; //TODO
@@ -383,23 +395,32 @@ public class Conexion {
                  TablaModificar = "DetalleTicket"; //TODO
             break;
             case 15: 
-                 TablaModificar = "Mesas"; //TODO
+                 TablaModificar = "Mesas";
+                 IDBuscado = "MesaID";//TODO
             break;
             case 16: 
                  TablaModificar = "MeseroAtiendeMesa"; //TODO
             break;
             case 17:
-                 TablaModificar = "TipoProducto"; //TODO
+                 TablaModificar = "TipoProducto";
+                 IDBuscado = "TipoProductoID";
             break;
             case 18: 
-                 TablaModificar = "Usuarios"; //TODO
+                 TablaModificar = "Usuarios";
+                 IDBuscado = "UsuarioID";//TODO
             break;
         }
         
         ResultSet rs = null;
         try {
+            String query;
+            
             Statement s = conexion.createStatement();
-            String query = "SELECT * FROM " + TablaModificar + " WHERE " + IDBuscado + " = " + Buscado;
+            if(comillasNecesitadas == 0) {
+                query = "SELECT * FROM " + TablaModificar + " WHERE " + IDBuscado + " = " + Buscado;
+            } else {
+                query = "SELECT * FROM " + TablaModificar + " WHERE " + IDBuscado + " = '" + Buscado + "'";
+            }
             
             rs = s.executeQuery(query);
             
@@ -618,6 +639,179 @@ public class Conexion {
         return puesto;
         
     }
+
+    public String[] ObtenerIDs(int Tabla) {
+        String TablaBuscar = null;
+        String query = null;
+        String ID = null;
+        
+        int elegir = 0; //Esto es para los autoincrementos cambia el query.
+        switch(Tabla) {
+            case 1:
+                TablaBuscar = "Cliente";
+                ID = "ClienteID";
+            break;
+            case 2:
+                TablaBuscar = "Proveedor";
+                ID = "ProveedorID";
+            break;
+            case 3:
+                TablaBuscar = "Empleado";
+                ID = "EmpleadoID";
+            break;
+            case 4:
+                TablaBuscar = "Horario";
+                ID = "HorarioID";
+            break;
+            case 5:
+                TablaBuscar = "Puesto";
+                ID = "NombrePuesto";
+            break;
+            case 6:
+                TablaBuscar = "Factura";
+                ID = "FacturaID";
+            break;
+            case 7:
+                TablaBuscar = "Ticket";
+                ID = "TicketID";
+            break;
+            case 8:
+                TablaBuscar = "Comanda";
+                ID = "ComandaID";
+            break;
+            case 9:
+                TablaBuscar = "Estados";
+                ID = "EstadoID";
+            break;
+            case 10:
+                TablaBuscar = "Municipios";
+                ID = "Nombre";
+            break;
+            case 11:
+                TablaBuscar = "Productos";
+                ID = "ProductoID";
+            break;
+            case 12:
+                TablaBuscar = "DetalleComanda";
+                //ID = "DetalleComandaID";
+            break;
+            case 13:
+                 TablaBuscar = "DetalleProveedor"; //TODO
+                //ID = "DetalleProveedorID";
+            break;
+            case 14:
+                 TablaBuscar = "DetalleTicket"; //TODO
+                //ID = "DetalleTicketID";
+            break;
+            case 15: 
+                 TablaBuscar = "Mesas"; //TODO
+                ID = "MesaID";
+            break;
+            case 16: 
+                 TablaBuscar = "MeseroAtiendeMesa"; //TODO
+                //ID = "";
+            break;
+            case 17:
+                 TablaBuscar = "TipoProducto"; //TODO
+                ID = "TipoProductoID";
+            break;
+            case 18: 
+                 TablaBuscar = "Usuarios"; //TODO
+                ID = "UsuarioID";
+            break;
+        }
+       ResultSet rs = null;
+        ArrayList<String> list = new ArrayList<String>();
+        String[] IDs = null;
+        try {
+            Statement s = conexion.createStatement();
+            query = "SELECT "+ID+" FROM "+TablaBuscar+" ORDER BY "+ID+" ASC";
+            
+            rs = s.executeQuery(query);
+            while(rs.next()){
+                list.add(rs.getString(1));
+            }
+            IDs = new String[list.size()];
+            list.toArray(IDs);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return IDs;
+    }
+     public int MunicipioID(String MunicipioNombre) {
+        int ID = 0;
+        ResultSet rs = null;
+        String Nombre = MunicipioNombre;
+         try {
+            Statement s = conexion.createStatement();
+                
+            String query = "SELECT MunicipioID FROM Municipios WHERE Nombre = '"+Nombre+"'";
+            
+            rs = s.executeQuery(query);
+            rs.next();
+            ID = rs.getInt(1);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ID;
+            }
+
+    public String MunicipioNombre(int ID) {
+        String Nombre = null;
+        ResultSet rs = null;
+         try {
+            Statement s = conexion.createStatement();
+                
+            String query = "SELECT Nombre FROM Municipios WHERE MunicipioID = "+ID+"";
+            
+            rs = s.executeQuery(query);
+            rs.next();
+            Nombre = rs.getString(1);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Nombre;
+    }
+
+    public int PuestoID(String Nombre) {
+       int ID = 0;
+        ResultSet rs = null;
+         try {
+            Statement s = conexion.createStatement();
+                
+            String query = "SELECT PuestoID FROM Puesto WHERE NombrePuesto = '"+Nombre+"'";
+            
+            rs = s.executeQuery(query);
+            rs.next();
+            ID = rs.getInt(1);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ID;
+    }
+
+    public String PuestoNombre(int ID) {
+       String Nombre = null;
+        ResultSet rs = null;
+         try {
+            Statement s = conexion.createStatement();
+                
+            String query = "SELECT NombrePuesto FROM Puesto WHERE PuestoID = "+ID+"";
+            
+            rs = s.executeQuery(query);
+            rs.next();
+            Nombre = rs.getString(1);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Nombre;
+    }
+    
    
 }
 

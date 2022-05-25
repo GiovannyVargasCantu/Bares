@@ -28,7 +28,7 @@
               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
           </Group>
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jComboBox1" min="-2" pref="200" max="-2" attributes="0"/>
@@ -59,7 +59,7 @@
           <Font name="Segoe UI" size="24" style="0"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(NombreTablas)" type="code"/>
+          <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] {&quot;Clientes&quot;,&quot;Empleado&quot;,&quot;Productos&quot;,&quot;Proveedor&quot;,&quot;DetalleProveedor&quot;,&quot;Puesto&quot;,&quot;Usuarios&quot;,&quot;Mesas&quot;,&quot;MeseroAtiendeMesa&quot;,&quot;Horario&quot;,&quot;TipoProducto&quot;})" type="code"/>
         </Property>
       </Properties>
       <Events>

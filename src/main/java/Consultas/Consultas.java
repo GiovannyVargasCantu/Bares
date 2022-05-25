@@ -29,7 +29,7 @@ public class Consultas extends javax.swing.JFrame {
         initComponents();
         
         bd = new Conexion();
-        String[] tableColumnsName = {"Ticket ID","Descripcion","Pago Total","Fecha","Metodo Pago","Comanda ID","Cajero ID"};
+        String[] tableColumnsName = {"Ticket ID","Pago Total","Fecha","Metodo Pago","Comanda ID","Cajero ID"};
         DefaultTableModel aModel = (DefaultTableModel) jTable1.getModel();
         aModel.setColumnIdentifiers(tableColumnsName);
         ResultSet rs = bd.Catalogo(7);
@@ -85,6 +85,7 @@ public class Consultas extends javax.swing.JFrame {
         anioTextField2 = new javax.swing.JTextField();
         anteriorRadioButton = new javax.swing.JRadioButton();
         posteriorRadioButton = new javax.swing.JRadioButton();
+        exactaRadioButton = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,7 +136,7 @@ public class Consultas extends javax.swing.JFrame {
             }
         });
 
-        empleadoIDCheckbox.setText("Por empleado ID:");
+        empleadoIDCheckbox.setText("Por Cajero ID:");
         empleadoIDCheckbox.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 empleadoIDCheckboxMouseClicked(evt);
@@ -234,18 +235,19 @@ public class Consultas extends javax.swing.JFrame {
         posteriorRadioButton.setText("Posterior");
         posteriorRadioButton.setEnabled(false);
 
+        buttonGroup3.add(exactaRadioButton);
+        exactaRadioButton.setText("Fecha Exacta");
+        exactaRadioButton.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 890, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(BotonRegreso))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 890, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -258,8 +260,12 @@ public class Consultas extends javax.swing.JFrame {
                                 .addComponent(jLabel1))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
-                                .addComponent(empleadoIDCheckbox)))))
-                .addGap(36, 36, 36))
+                                .addComponent(empleadoIDCheckbox)))
+                        .addGap(36, 36, 36))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(BotonRegreso)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(925, 925, 925)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,61 +300,64 @@ public class Consultas extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(7, 7, 7)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(anteriorRadioButton)
-                                    .addComponent(posteriorRadioButton))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                    .addComponent(posteriorRadioButton)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(anteriorRadioButton)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(exactaRadioButton)))))
+                        .addGap(0, 17, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(fechaCheckbox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SingleFechaRadioButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(anteriorRadioButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(posteriorRadioButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(DuoFechaRadioButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(diaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(mesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(anioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(diaTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(mesTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)
-                            .addComponent(anioTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(empleadoIDCheckbox)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(empleadoIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ascendenteRadioButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(descendenteRadioButton)
-                        .addGap(31, 31, 31)
-                        .addComponent(buscarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(fechaCheckbox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SingleFechaRadioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(anteriorRadioButton)
+                    .addComponent(exactaRadioButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(posteriorRadioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(DuoFechaRadioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(diaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(mesTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(anioTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(diaTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(mesTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(anioTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(empleadoIDCheckbox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(empleadoIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ascendenteRadioButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(descendenteRadioButton)
+                .addGap(31, 31, 31)
+                .addComponent(buscarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(BotonRegreso)
-                .addGap(15, 15, 15))
+                .addGap(23, 23, 23))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
@@ -526,8 +535,10 @@ public class Consultas extends javax.swing.JFrame {
             } else {
                 if(anteriorRadioButton.isSelected()) {
                     dateQuery = "(Fecha < '" + anio + "-" + mes + "-" + dia + "')";
-                } else {
+                } else if(posteriorRadioButton.isSelected()) {
                     dateQuery = "(Fecha > '" + anio + "-" + mes + "-" + dia + "')";
+                } else if(exactaRadioButton.isSelected()){
+                    dateQuery = "(Fecha = '" + anio + "-" + mes + "-" + dia + "')";
                 }
             }
             
@@ -584,7 +595,7 @@ public class Consultas extends javax.swing.JFrame {
         }
         
         bd = new Conexion();
-        String[] tableColumnsName = {"Ticket ID","Descripcion","Pago Total","Fecha","Metodo Pago","Comanda ID","Cajero ID"};
+        String[] tableColumnsName = {"Ticket ID","Pago Total","Fecha","Metodo Pago","Comanda ID","Cajero ID"};
         DefaultTableModel aModel = (DefaultTableModel) jTable1.getModel();
         aModel.setColumnIdentifiers(tableColumnsName);
         ResultSet rs = bd.ConsultarBusqueda(Query);
@@ -626,7 +637,9 @@ public class Consultas extends javax.swing.JFrame {
             anioTextField.setEnabled(true);
             SingleFechaRadioButton.setEnabled(true);
             DuoFechaRadioButton.setEnabled(true);
-            SingleFechaRadioButton.setSelected(true);
+            anteriorRadioButton.setEnabled(true);
+            posteriorRadioButton.setEnabled(true);
+            exactaRadioButton.setEnabled(true);
         } else {
             diaTextField.setEnabled(false);
             mesTextField.setEnabled(false);
@@ -634,6 +647,9 @@ public class Consultas extends javax.swing.JFrame {
             SingleFechaRadioButton.setEnabled(false);
             DuoFechaRadioButton.setEnabled(false);
             SingleFechaRadioButton.setSelected(false);
+            anteriorRadioButton.setEnabled(false);
+            posteriorRadioButton.setEnabled(false);
+            exactaRadioButton.setEnabled(false);
         }
     }//GEN-LAST:event_fechaCheckboxMouseClicked
 
@@ -670,6 +686,7 @@ public class Consultas extends javax.swing.JFrame {
         // TODO add your handling code here:
         anteriorRadioButton.setEnabled(true);
         posteriorRadioButton.setEnabled(true);
+        exactaRadioButton.setEnabled(true);
         diaTextField2.setEnabled(false);
         mesTextField2.setEnabled(false);
         anioTextField2.setEnabled(false);
@@ -679,6 +696,7 @@ public class Consultas extends javax.swing.JFrame {
         // TODO add your handling code here:
         anteriorRadioButton.setEnabled(false);
         posteriorRadioButton.setEnabled(false);
+        exactaRadioButton.setEnabled(false);
         diaTextField2.setEnabled(true);
         mesTextField2.setEnabled(true);
         anioTextField2.setEnabled(true);
@@ -740,6 +758,7 @@ public class Consultas extends javax.swing.JFrame {
     private javax.swing.JTextField diaTextField2;
     private javax.swing.JCheckBox empleadoIDCheckbox;
     private javax.swing.JTextField empleadoIDTextField;
+    private javax.swing.JRadioButton exactaRadioButton;
     private javax.swing.JCheckBox fechaCheckbox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

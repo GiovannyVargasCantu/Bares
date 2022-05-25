@@ -183,6 +183,11 @@ public class GenerarTicket extends javax.swing.JFrame {
         System.out.println(comandaID);
         fecha = Ingresar.devolverFecha();
         System.out.println(fecha);
+        if(ComandaID.getSelectedItem()==null){
+            JOptionPane.showMessageDialog(null, "No hay comandas activas con productos");
+            return;
+        }
+        
         //////////////////////////
         
         //////////////////////////

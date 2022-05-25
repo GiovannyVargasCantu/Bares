@@ -7,10 +7,15 @@ package SQL.CapaPresentacion;
 import Consultas.Consultas;
 import SQL.Conexion;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 /**
  *
@@ -44,6 +49,22 @@ public class Menu extends javax.swing.JFrame {
                      break;
          }
      }
+     void mostrarFecha(){
+        Date fecha = new Date();
+        SimpleDateFormat sfecha = new SimpleDateFormat("dd/MM/yyyy");
+        FechaLabel.setText(sfecha.format(fecha));
+    }
+    
+    void mostrarTiempo(){
+        new Timer(0, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Date hora = new Date();
+        SimpleDateFormat shora = new SimpleDateFormat("hh:mm:ss a");
+        HoraLabel.setText(shora.format(hora));
+            }
+        }).start();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,6 +85,8 @@ public class Menu extends javax.swing.JFrame {
         consultaButton = new javax.swing.JButton();
         TextoBienvenida = new javax.swing.JLabel();
         NombreUsuario = new javax.swing.JLabel();
+        FechaLabel = new javax.swing.JLabel();
+        HoraLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,7 +124,7 @@ public class Menu extends javax.swing.JFrame {
             .addGap(0, 150, Short.MAX_VALUE)
         );
 
-        bg.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 30, 180, 150));
+        bg.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 250, 180, 150));
 
         jPanel3.setBackground(new java.awt.Color(170, 170, 170));
 
@@ -181,6 +204,14 @@ public class Menu extends javax.swing.JFrame {
         NombreUsuario.setForeground(new java.awt.Color(0, 204, 0));
         NombreUsuario.setText("jLabel3");
         bg.add(NombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, 90, 30));
+
+        FechaLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        FechaLabel.setText("Fecha");
+        bg.add(FechaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, -1, -1));
+
+        HoraLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        HoraLabel.setText("Hora");
+        bg.add(HoraLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -293,6 +324,8 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonRegreso;
+    private javax.swing.JLabel FechaLabel;
+    private javax.swing.JLabel HoraLabel;
     private javax.swing.JLabel NombreUsuario;
     private javax.swing.JLabel TextoBienvenida;
     private javax.swing.JPanel bg;

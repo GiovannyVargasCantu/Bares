@@ -480,6 +480,10 @@ public class GenerarComanda extends javax.swing.JFrame {
         int cantidad = (int) Cantidad.getValue();
         ResultSet rs;
         Statement s;
+        if(BuscarComandaID.getSelectedItem()==null){
+            JOptionPane.showMessageDialog(null, "No hay comandas activas");
+            return;
+        }
         try {
             s = conexion.createStatement();
             String query = "SELECT ProductoID FROM Productos";
