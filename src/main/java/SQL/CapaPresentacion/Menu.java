@@ -30,6 +30,8 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
         AsignarNombreUsuario();
         ValidacionPuesto();
+        mostrarFecha();
+        mostrarTiempo();
     }
     private Conexion bd;
     int puesto=0;
@@ -207,11 +209,11 @@ public class Menu extends javax.swing.JFrame {
 
         FechaLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         FechaLabel.setText("Fecha");
-        bg.add(FechaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, -1, -1));
+        bg.add(FechaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, -1, -1));
 
         HoraLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         HoraLabel.setText("Hora");
-        bg.add(HoraLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, -1, -1));
+        bg.add(HoraLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
