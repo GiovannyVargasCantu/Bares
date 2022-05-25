@@ -28,15 +28,23 @@ public class Menu extends javax.swing.JFrame {
      */
     public Menu() {
         initComponents();
-        AsignarNombreUsuario();
+        AsignarNombrePuesto();
         ValidacionPuesto();
+        AsignarNombreUsuario();
         mostrarFecha();
         mostrarTiempo();
+        Conexion con = new Conexion();
+        con.establecerConexion();
+        System.out.println(Conexion.usuario+""+Conexion.contrasenia);
+        
     }
     private Conexion bd;
     int puesto=0;
-     private void AsignarNombreUsuario() {
-        NombreUsuario.setText(Ingresar.usuario);
+     private void AsignarNombrePuesto() {
+        NombreUsuario.setText(Conexion.usuario);
+    }
+      private void AsignarNombreUsuario() {
+        jLabel3.setText(Ingresar.usuario);
     }
      private void ValidacionPuesto(){
          bd = new Conexion();
@@ -89,6 +97,8 @@ public class Menu extends javax.swing.JFrame {
         NombreUsuario = new javax.swing.JLabel();
         FechaLabel = new javax.swing.JLabel();
         HoraLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -205,7 +215,7 @@ public class Menu extends javax.swing.JFrame {
         NombreUsuario.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         NombreUsuario.setForeground(new java.awt.Color(0, 204, 0));
         NombreUsuario.setText("jLabel3");
-        bg.add(NombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, 90, 30));
+        bg.add(NombreUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 300, 90, 30));
 
         FechaLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         FechaLabel.setText("Fecha");
@@ -214,6 +224,15 @@ public class Menu extends javax.swing.JFrame {
         HoraLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         HoraLabel.setText("Hora");
         bg.add(HoraLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setText("Puesto:");
+        bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 300, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(51, 153, 255));
+        jLabel3.setText("jLabel3");
+        bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -240,14 +259,7 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void catalogoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_catalogoButtonMouseClicked
-        try {
-            // TODO add your handling code here:
-            Catalogo catalogo = new Catalogo();
-            catalogo.setVisible(true);
-            dispose();
-        } catch (SQLException ex) {
-            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }//GEN-LAST:event_catalogoButtonMouseClicked
 
     private void BotonRegresoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonRegresoMouseClicked
@@ -259,17 +271,25 @@ public class Menu extends javax.swing.JFrame {
 
     private void catalogoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_catalogoButtonActionPerformed
         // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            Catalogo catalogo = new Catalogo();
+            catalogo.setVisible(true);
+            dispose();
+        } catch (SQLException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_catalogoButtonActionPerformed
 
     private void operacionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_operacionButtonActionPerformed
         // TODO add your handling code here:
+        Operaciones consulta = new Operaciones();
+        consulta.setVisible(true);
+        dispose();
     }//GEN-LAST:event_operacionButtonActionPerformed
 
     private void consultaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_consultaButtonActionPerformed
-
-    private void consultaButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultaButtonMouseClicked
         try {
             // TODO add your handling code here:
             //Leave it to me!
@@ -279,14 +299,16 @@ public class Menu extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }//GEN-LAST:event_consultaButtonActionPerformed
+
+    private void consultaButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_consultaButtonMouseClicked
+        
     }//GEN-LAST:event_consultaButtonMouseClicked
 
     private void operacionButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_operacionButtonMouseClicked
         // TODO add your handling code here:
         //Leave it to me!
-        Operaciones consulta = new Operaciones();
-        consulta.setVisible(true);
-        dispose();
+        
     }//GEN-LAST:event_operacionButtonMouseClicked
 
     /**
@@ -334,6 +356,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton catalogoButton;
     private javax.swing.JButton consultaButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

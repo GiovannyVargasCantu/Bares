@@ -30,16 +30,26 @@ public class Conexion {
     public static Connection conexion = null;
     public static String cadenaconexion = "jdbc:sqlserver://localhost:1433;databaseName=Bares;encrypt=true;trustServerCertificate=true";
     public static boolean validacion = true;
+    public static String usuario = null;
+    public static String contrasenia = null;
+    
+  
+
+    
     public Connection establecerConexion(){
          //System.out.println(usuario);
          //System.out.println(contrasenia);
 
         try {
-            conexion = DriverManager.getConnection(cadenaconexion,Ingresar.usuario,Ingresar.contrasenia);
-            System.out.println(Ingresar.usuario);
-            System.out.println(Ingresar.contrasenia);
-           JOptionPane.showMessageDialog(null,"Credenciales correctas");
-           validacion = true;
+            if(Ingresar.pase == 0){
+            conexion = DriverManager.getConnection(cadenaconexion,"Admin","hhqn3m");
+            System.out.println("SI DEBE IR");
+            }
+            else{
+                System.out.println("NO DEBE IR");
+                 conexion = DriverManager.getConnection(cadenaconexion,usuario,contrasenia);
+                 validacion = true;
+            }
         } catch (HeadlessException | SQLException e) { 
             JOptionPane.showMessageDialog(null,"Error al conectar a la base de datos, error:"+ e.toString());
             validacion = false;
@@ -49,15 +59,10 @@ public class Conexion {
     
     public void estableceConexion()
     {
-        if (conexion != null)
-            return;
-
-        try
-        {
-           conexion = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=Bares;encrypt=true;trustServerCertificate=true","usersql","root2");
-        } catch (SQLException e)
-        {
-            e.printStackTrace();
+        try {
+            conexion = DriverManager.getConnection(cadenaconexion,"Admin","hhqn3m");
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
      
@@ -810,6 +815,63 @@ public class Conexion {
             e.printStackTrace();
         }
         return Nombre;
+    }
+
+    public String ObtenerPuestoString() {
+      String Nombre = null;
+      ResultSet rs = null;
+       try{
+            Statement s = conexion.createStatement();
+         String query = "select Puesto.NombrePuesto from Usuarios INNER JOIN Puesto ON Usuarios.PuestoID = Puesto.PuestoID "
+              + "WHERE NombreUsuario = '"+Ingresar.usuario+"'";
+            rs = s.executeQuery(query);
+            rs.next();
+            Nombre = rs.getString(1);
+         } catch (Exception e) {
+            e.printStackTrace();
+        }
+         return Nombre;
+   
+    }
+
+    public String AsignarPuestoContrasenia() {
+       String Nombre = null;
+      ResultSet rs = null;
+       try{
+            Statement s = conexion.createStatement();
+         String query = "select Usuarios.Contrasenia from Puesto INNER JOIN Usuarios ON Puesto.PuestoID = Usuarios.PuestoID "
+              + "WHERE NombrePuesto = '"+usuario+"'";
+            rs = s.executeQuery(query);
+            rs.next();
+            Nombre = rs.getString(1);
+         } catch (Exception e) {
+            e.printStackTrace();
+        }
+         return Nombre;
+       
+    }
+
+    public boolean ValidarUser(String usuario, String contra) {
+        String resultado = null;
+        boolean verificacion = false;
+        ResultSet rs = null;
+       try{
+            Statement s = conexion.createStatement();
+         String query = "select UsuarioID from Usuarios WHERE NombreUsuario = '"+usuario+"' and Contrasenia = '"+contra+"'";
+            rs = s.executeQuery(query);
+            System.out.println("Si entre");
+            if(rs.next()){
+                 verificacion = true;
+            }
+             else{
+                System.out.println("HOLAAAXDDDDDDDD");
+                 verificacion = false;
+             }
+         } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("HOLAAA");
+        return verificacion;
     }
     
    

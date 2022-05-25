@@ -9,6 +9,7 @@ import AgregarProductosComanda.GenerarFactura;
 import AgregarProductosComanda.GenerarTicket;
 import Alterar.AlterarClientes;
 import Alterar.AlterarMenu;
+import SQL.Conexion;
 import java.sql.SQLException;
 
 /**
@@ -22,8 +23,24 @@ public class Operaciones extends javax.swing.JFrame {
      */
     public Operaciones() {
         initComponents();
+        ValidacionPuesto();
     }
-
+    private Conexion bd;
+    private void ValidacionPuesto(){
+         bd = new Conexion();
+         int puesto = bd.ObtenerPuestoID();
+         switch(puesto){
+             case 1: BotonAlterar.setEnabled(false);
+             case 2: break;
+             case 3: BotonAlterar.setEnabled(false);
+                     BotonTicket.setEnabled(false);
+                     BotonFactura.setEnabled(false);
+                     break;
+             case 4: BotonAlterar.setEnabled(false);
+                     BotonComanda.setEnabled(false);
+                     break;
+         }
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,39 +50,49 @@ public class Operaciones extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        BotonComanda = new javax.swing.JButton();
+        BotonTicket = new javax.swing.JButton();
+        BotonFactura = new javax.swing.JButton();
+        BotonAlterar = new javax.swing.JButton();
         BotonRegresoConsultas1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Generar comanda");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        BotonComanda.setText("Generar comanda");
+        BotonComanda.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                BotonComandaMouseClicked(evt);
             }
         });
-
-        jButton2.setText("Generar Ticket");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BotonComanda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BotonComandaActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Generar Factura");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        BotonTicket.setText("Generar Ticket");
+        BotonTicket.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                BotonTicketActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Alterar");
-        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+        BotonFactura.setText("Generar Factura");
+        BotonFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonFacturaActionPerformed(evt);
+            }
+        });
+
+        BotonAlterar.setText("Alterar");
+        BotonAlterar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton4MouseClicked(evt);
+                BotonAlterarMouseClicked(evt);
+            }
+        });
+        BotonAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonAlterarActionPerformed(evt);
             }
         });
 
@@ -75,6 +102,11 @@ public class Operaciones extends javax.swing.JFrame {
                 BotonRegresoConsultas1MouseClicked(evt);
             }
         });
+        BotonRegresoConsultas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonRegresoConsultas1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,13 +114,13 @@ public class Operaciones extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
-                .addComponent(jButton1)
+                .addComponent(BotonComanda)
                 .addGap(77, 77, 77)
-                .addComponent(jButton2)
+                .addComponent(BotonTicket)
                 .addGap(77, 77, 77)
-                .addComponent(jButton3)
+                .addComponent(BotonFactura)
                 .addGap(173, 173, 173)
-                .addComponent(jButton4)
+                .addComponent(BotonAlterar)
                 .addContainerGap(173, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -100,10 +132,10 @@ public class Operaciones extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(159, 159, 159)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(BotonComanda)
+                    .addComponent(BotonTicket)
+                    .addComponent(BotonFactura)
+                    .addComponent(BotonAlterar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
                 .addComponent(BotonRegresoConsultas1)
                 .addGap(24, 24, 24))
@@ -112,41 +144,54 @@ public class Operaciones extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+    private void BotonAlterarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonAlterarMouseClicked
         // TODO add your handling code here:
         //Leave it to me!
-        AlterarMenu MenuAlterar = new AlterarMenu();
-        MenuAlterar.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButton4MouseClicked
+    }//GEN-LAST:event_BotonAlterarMouseClicked
 
     private void BotonRegresoConsultas1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonRegresoConsultas1MouseClicked
         // TODO add your handling code here:
-        Menu menu = new Menu();
-        menu.setVisible(true);
-        dispose();
     }//GEN-LAST:event_BotonRegresoConsultas1MouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void BotonComandaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BotonComandaMouseClicked
         // TODO add your handling code here:
-        GenerarComanda comanda = new GenerarComanda();
-        comanda.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButton1MouseClicked
+       
+    }//GEN-LAST:event_BotonComandaMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void BotonTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonTicketActionPerformed
         // TODO add your handling code here:
         GenerarTicket ticket = new GenerarTicket();
         ticket.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_BotonTicketActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void BotonFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonFacturaActionPerformed
         // TODO add your handling code here:
         GenerarFactura fac = new GenerarFactura();
         fac.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_BotonFacturaActionPerformed
+
+    private void BotonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAlterarActionPerformed
+        // TODO add your handling code here:
+        AlterarMenu MenuAlterar = new AlterarMenu();
+        MenuAlterar.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_BotonAlterarActionPerformed
+
+    private void BotonComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonComandaActionPerformed
+        // TODO add your handling code here:
+         GenerarComanda comanda = new GenerarComanda();
+        comanda.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_BotonComandaActionPerformed
+
+    private void BotonRegresoConsultas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegresoConsultas1ActionPerformed
+        // TODO add your handling code here:
+         Menu menu = new Menu();
+        menu.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_BotonRegresoConsultas1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,10 +229,10 @@ public class Operaciones extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonAlterar;
+    private javax.swing.JButton BotonComanda;
+    private javax.swing.JButton BotonFactura;
     private javax.swing.JButton BotonRegresoConsultas1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton BotonTicket;
     // End of variables declaration//GEN-END:variables
 }

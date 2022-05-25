@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
@@ -24,6 +25,8 @@ public final class Ingresar extends javax.swing.JFrame {
         initComponents();
         mostrarFecha();
         mostrarTiempo();
+        Conexion con = new Conexion();
+        con.establecerConexion();
     }
    
     
@@ -32,7 +35,8 @@ public final class Ingresar extends javax.swing.JFrame {
     
     public static String usuario;
     public static String contrasenia; 
-    
+    public static int pase = 0;
+    private Conexion bd;
     void mostrarFecha(){
         Date fecha = new Date();
         SimpleDateFormat sfecha = new SimpleDateFormat("dd/MM/yyyy");
@@ -54,6 +58,13 @@ public final class Ingresar extends javax.swing.JFrame {
         SimpleDateFormat sfecha = new SimpleDateFormat("yyyy/MM/dd");
         return sfecha.format(new Date());
     }
+      private boolean ValidarUsuario(String user,String contra) {
+       bd = new Conexion();
+       return bd.ValidarUser(user,contra);
+    }
+    
+    
+     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -204,12 +215,20 @@ public final class Ingresar extends javax.swing.JFrame {
         // TODO add your handling code here:
         usuario = UsuarioTxtField.getText();//Obtiene los "valores" tanto del usuario como contraseña, esto es como un ngmodel
         contrasenia = ContraseniaTxtField.getText();//Aparece en amarillo getText de contrasenia porque "It's not longer supported by Java, something like that, doesn't affect our proyect"
-        Conexion con = new Conexion();
-        con.establecerConexion();
+        System.out.println(usuario);
+        System.out.println(contrasenia);
+        if(ValidarUsuario(usuario,contrasenia)){
+            pase = 1;
+            Conexion.usuario = bd.ObtenerPuestoString();
+            Conexion.contrasenia = bd.AsignarPuestoContrasenia();
         if(Conexion.validacion){ 
             Menu menu = new Menu();
             menu.setVisible(true);
             dispose();
+        }
+        }
+        else{
+             JOptionPane.showMessageDialog(null,"Error al conectar a la base de datos, error:");
         }
     }//GEN-LAST:event_BotonIngresarMouseClicked
 
@@ -263,4 +282,7 @@ public final class Ingresar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
+
+    
+
 }
