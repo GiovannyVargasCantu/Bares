@@ -16,6 +16,43 @@
             <artifactId>mssql-jdbc</artifactId>
             <version>11.1.0.jre17-preview</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.toedter</groupId>
+            <artifactId>jcalendar</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE130</version>
+        </dependency>
     </dependencies>
+    <build>
+<plugins>
+<plugin>
+<artifactId>maven-assembly-plugin</artifactId>
+<version>2.4</version>
+<configuration>
+<descriptorRefs>
+<descriptorRef>jar-with-dependencies</descriptorRef>
+</descriptorRefs>
+<archive>
+<manifest>
+<mainClass>SQL.CapaPresentacion.Ingresar</mainClass>
+</manifest>
+</archive>
+</configuration>
+<executions>
+<execution>
+<id>make-assembly</id>
+<phase>package</phase>
+<goals>
+<goal>single</goal>
+</goals>
+</execution>
+</executions>
+</plugin>
+</plugins>
+</build>
+    <name>Bares 1.1</name>
 </project>

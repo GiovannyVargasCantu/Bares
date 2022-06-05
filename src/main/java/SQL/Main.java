@@ -4,16 +4,12 @@
  */
 package SQL;
 
-
 /**
  *
  * @author Giovanny Vargas
  */
-public class main {
+public class Main {
     public static void main(String[] args) {
-        Conexion objetoconexion = new Conexion();
-        objetoconexion.establecerConexion();
-        
     }
+
 }
- 
